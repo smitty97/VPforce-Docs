@@ -1,5 +1,9 @@
 # Changelog
 
+- **February 7, 2026:**
+
+    - Updated **[RHINO Maintenance][rhino-maintenance]** with warnings about fragile Molex Picoblade contacts, added gimbal stem screws as a potential source of clicking noise, and included an introduction for the grip mount head replacement section
+
 - **December 3, 2025:**
 
     - Added comprehensive **[Power Issues][power-issues]** troubleshooting section with separate diagnostics for USB power path failures and DC motor power failures
