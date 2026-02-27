@@ -19,7 +19,7 @@ We invite you to explore these amazing projects and get inspired to create your 
 
 ### FFB Joystick Bases
 
-#### [TheAmazinGreat's 86 Motor FFB Base](theamazingreat-rhino.md)
+#### [TheAmazinGreat 86 Motor FFB Base](theamazingreat-rhino.md)
 
 A modified FFB joystick base designed for larger 86BLF03/86BLF04 motors, providing increased torque output and superior thermal management compared to standard 57 series motor builds. Compatible with community gimbals and printable on Ender3-sized printers or larger.
 

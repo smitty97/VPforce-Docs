@@ -20,7 +20,7 @@ The comprehensive guide to the VPForce Rhino stick base, covering everything fro
 
 Community-created FFB projects, modifications, and custom builds. Features:
 
-- DIY FFB joystick bases including TheAmazingGreat's 86 motor configuration
+- DIY FFB joystick bases including TheAmazinGreat's 86 motor configuration
 - FFB pedal modifications for Tiger TPR and MFG Crosswind systems
 - Planetary gearbox implementation guides for increased torque
 - Community Rhino base design variations

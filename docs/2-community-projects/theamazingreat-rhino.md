@@ -1,4 +1,4 @@
-# TheAmazinGreat's '86 Motor FFB Base
+# TheAmazinGreat 86 Motor FFB Base
 
 This project is a modification of Gadroc's FFB joystick base, designed to accommodate larger 86BLF03 or 86BLF04 series motors for stronger force feedback. The design uses the same gimbal as other community builds but features larger panels to fit the bigger motors. Panels are not interchangeable with standard builds due to the increased motor size.
 

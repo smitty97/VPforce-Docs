@@ -3,7 +3,7 @@
 - **February 27, 2026:**
 
     - Added **Technical Specifications** section to the [Monster Rhino Kitbase](3-third-party-vendors/SR-F_Winger.md) page with motor torque constant (Kt), drive current limit, computed motor shaft torque, and per-gear-ratio peak torque at the stick (~15.2 N·m at 60T/15T, ~18.3 N·m at 72T/15T)
-    - Updated **[TheAmazingGreat's 86 Motor FFB Base](2-community-projects/theamazingreat-rhino.md)** torque section with a full per-motor, per-gear-ratio table including 86BLF03 (Kt 0.110 N·m/A, ~13–16 N·m) and 86BLF04 (Kt 0.127 N·m/A, ~15–18 N·m) calculated from motor specs
+    - Updated **[TheAmazinGreat 86 Motor FFB Base](2-community-projects/theamazingreat-rhino.md)** torque section with a full per-motor, per-gear-ratio table including 86BLF03 (Kt 0.110 N·m/A, ~13–16 N·m) and 86BLF04 (Kt 0.127 N·m/A, ~15–18 N·m) calculated from motor specs
 
 - **February 24, 2026:**
 
@@ -57,7 +57,7 @@
     - Expanded **[Known Issues](1-rhino/7-appendix-a-known-issues.md)** with DCS axis curve incompatibility explanation and FFB best practices
     - Documented IL-2 8-device USB limit and devreorder workaround solution
     - Added **[Community Projects](2-community-projects/index.md)** section featuring DIY FFB builds and modifications
-    - Documented **[TheAmazingGreat's 86 Motor FFB Base](2-community-projects/theamazingreat-rhino.md)** with thermal management advantages for extended high-intensity use
+    - Documented **[TheAmazinGreat 86 Motor FFB Base](2-community-projects/theamazingreat-rhino.md)** with thermal management advantages for extended high-intensity use
     - Added **[Tiger TPR FFB Mod Guide](2-community-projects/Tiger_TPR_FFB_Mod_Guide.md)** for Thrustmaster TPR pedal FFB conversion
     - Added **[TPR FFB Project Documentation](2-community-projects/TPR_FFB_Project_Documentation.md)** with complete assembly procedures and troubleshooting FAQ
     - Added **[MFG Crosswind FFB Mod Guide](2-community-projects/MFG_Crosswind_FFB_Mod_Guide.md)** for MFG Crosswind pedal FFB conversion

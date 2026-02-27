@@ -4,7 +4,7 @@
 
 ![Monster Rhino](images/SR-F_Winger/image.png){ width="400" }
 
-The "Monster" Rhino Kitbase is a third-party offering from SR-F_Winger, based on the work of @TheAmazingGreat. It utilizes the largest available VPForce DIY Motor Kit (86BLF04) to create the most powerful Rhino build possible.
+The "Monster" Rhino Kitbase is a third-party offering from SR-F_Winger, based on the work of @TheAmazinGreat. It utilizes the largest available VPForce DIY Motor Kit (86BLF04) to create the most powerful Rhino build possible.
 
 This kit is for users who want the strongest Rhino money can currently buy, with more headroom before cooling is needed, but without the hassle of sourcing all the individual screws, cables, and other parts.
 
@@ -45,7 +45,7 @@ The 86BLF04 motor's larger frame provides substantially greater thermal mass and
 - Longer sustained high-force operation (extended dogfights, sustained G-load scenarios)
 - More headroom before the active cooling system needs to intervene
 
-For a detailed discussion of the thermal advantages of 86-series motors, see [TheAmazingGreat's 86 Motor FFB Base](../2-community-projects/theamazingreat-rhino.md).
+For a detailed discussion of the thermal advantages of 86-series motors, see [TheAmazinGreat 86 Motor FFB Base](../2-community-projects/theamazingreat-rhino.md).
 
 ## Kit Variants
 
