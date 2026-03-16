@@ -415,6 +415,19 @@ After correcting the driver:
     Zadig and similar USB driver replacement tools can cause persistent driver conflicts with the Rhino. These tools leave fingerprints in the Windows driver store that can prevent proper WinUSB operation even after uninstalling. If you previously used Zadig with Rhino, follow the full driver cleanup procedure above to remove all traces.
 
 
+## Motor LED Indicators
+
+Each motor has an integrated driver with a status LED that provides diagnostic information through flash patterns:
+
+- **Green flashes** — indicate the assigned **motor ID**:
+
+    - **1 flash** = Motor ID 0 (pitch / X-axis)
+    - **2 flashes** = Motor ID 1 (roll / Y-axis)
+
+- **Red flashes** — indicate a **fault condition**. Check the Configurator status bar for the specific fault code (see [Motor Faults](#motor-faults) below).
+
+- **LED normally OFF, brief blink every few seconds** — the motor has power but is not actively communicating with the Rhino main board. 
+
 ## Motor faults
 
 ### FAULT_UNSTABLE
@@ -426,7 +439,7 @@ The Rhino reports a `FAULT_UNSTABLE` error. This fault typically occurs suddenly
 The device's fault message usually identifies which motor (or axis) triggered the fault. Check the indicated motor/axis first — it typically points straight to the side that needs inspection.
 
 **Cause:**
-This fault is most commonly caused by **belt slippage** on either the X-axis or Y-axis. When the belt connecting a motor to its pulley loses tension or alignment, the motor and pulley can slip relative to each other. The sudden slip causes the controller to detect an unexpected position change that doesn't match the expected motor command, triggering the stability check and generating the fault. The audible thump is often the moment when slippage occurs.
+This fault is most commonly caused by **belt slippage** on either the X-axis or Y-axis. When the belt connecting a motor to its pulley loses tension or alignment, the motor and pulley can slip relative to each other. The sudden slip causes the Rhino to detect an unexpected position change that doesn't match the expected motor command, triggering the stability check and generating the fault. The audible thump is often the moment when slippage occurs.
 
 **Resolution:**
 
@@ -460,7 +473,7 @@ This fault protects motor drivers by halting operation when voltage is insuffici
 
 **Resolution:**
 
-1. **Check power connections:** Inspect PSU-to-controller cables and connectors. Ensure tight, clean, corrosion-free connections.
+1. **Check power connections:** Inspect PSU cables and connectors. Ensure tight, clean, corrosion-free connections.
 
 2. **Verify PSU output voltage:** Measure PSU output voltage with multimeter under no load. Should match rated voltage.
 
@@ -791,7 +804,7 @@ When experiencing issues with your Rhino, providing complete information up fron
 >
 > **Setup:**
 > - Rhino firmware: 1.0.20
-> - DCS: Open Beta 2.9.8.61234
+> - DCS World 2.9.8.61234
 > - Grip: Virpil MongoosT-50CM3 with 10cm extension
 > - Started happening after firmware update last week
 >
@@ -850,7 +863,7 @@ Provide a clear description including:
 #### 💡 System Information
 
 - **Rhino firmware version** (visible in Configurator)
-- **Simulator name and version** (DCS Open Beta 2.9.8, IL-2 v5.201, etc.)
+- **Simulator name and version** (DCS World 2.9.8, IL-2 v5.201, etc.)
 - **Grip type and extensions** (VKB, Virpil, extension length)
 - **Recent changes to your setup** (firmware updates, new hardware, configuration changes)
 

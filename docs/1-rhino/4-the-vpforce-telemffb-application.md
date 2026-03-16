@@ -1742,6 +1742,27 @@ The primary difference is that for each DCS aircraft, the telemetry must be indi
 
 For DCS Aircraft, the Hydraulic System Threshold setting has already been coarsely configured for each of the supported aircraft, depending on how the data is being read and what the normal values are.
 
+#### Autopilot Oscillation with FFB
+
+Some DCS aircraft experience pitch or roll oscillations when engaging autopilot modes (attitude hold, altitude hold, etc.) with an FFB joystick connected. The autopilot commands a stick position through the spring effect, but the FFB device may overshoot or lag slightly, causing the autopilot to overcorrect. This creates a feedback loop that produces several oscillation cycles before stabilizing — or in some cases, never fully stabilizing.
+
+This behavior is a DCS-side limitation in how the simulator's autopilot interacts with DirectInput force feedback. It is not caused by the Rhino hardware, VPforce Configurator, or TelemFFB.
+
+**Diagnostic check:**
+
+1. Open the DCS controls indicator with `RCtrl+Enter`
+2. Engage the autopilot mode and observe the stick position
+3. If the stick input visibly lags behind or hunts around the commanded trim position, the autopilot-FFB control loop is unstable
+
+**What you can try:**
+
+- Ensure **DCS Axis Tune deadzone** is set to `0` — do not stack the DCS deadzone on top of a firmware deadzone, as this can make the oscillation worse
+- Do a clean baseline: **Factory Reset → Import Rhino Defaults → Store Settings**, then retest with only the autopilot deadzone adjusted
+- Keep in mind that not all aircraft are affected equally — the behavior depends on how each module implements autopilot control surfaces
+
+!!! note
+    TelemFFB's **Autopilot Following** feature is available for MSFS and X-Plane only. It does not apply to DCS, where the autopilot interaction is handled entirely by the simulator's native FFB implementation.
+
 ### IL-2
 
 #### Duplicate 'Shake' effects

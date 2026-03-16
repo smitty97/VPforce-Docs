@@ -158,7 +158,7 @@ Think of the Effects tab as setting "what effects are available and how they beh
 
 ![Grip Calibration View](media/grip_calibration.png)
 
-Inside the Settings tab, you'll find a **Grip Type** dropdown menu. This allows you to select the type of grip connected to your Rhino (e.g., VKB, Virpil, Loopback, or other supported grips).
+Inside the Settings tab, you'll find a **Grip Type** dropdown menu. This allows you to select the type of grip connected to your Rhino (e.g., VKB, Virpil, or other supported grips). Select **Loopback** only when using the [RhinoLoopback application](#the-rhinoloopback-application) to bridge buttons from a separate USB device.
 
 !!! tip
     Clicking the colored box allows yout to set the LED color for the grip if supported.
@@ -543,13 +543,16 @@ After calibration or configuration changes:
 
 ### Purpose and Overview
 
-**RhinoLoopback** is a utility application that bridges button inputs from external controllers to the VPforce FFB Configurator. This is particularly useful when using grips that connect via passthrough cables (such as VKB grips) or when you want to use a separate controller to operate Rhino-specific features like *Hardware Force Trim*.
+**RhinoLoopback** is a utility application that bridges button inputs from an external USB controller to the Rhino. It is designed for grips that connect via **passthrough cables** — in this setup, the Rhino does **not** read the grip's buttons directly. Instead, another USB device (such as a VKB Gunfighter base) reads the grip buttons, and RhinoLoopback forwards those button inputs to the Rhino so they can be used with Configurator features like *Hardware Force Trim*.
+
+!!! important "When You Do NOT Need Loopback"
+    If your grip connects **directly** to the Rhino's grip connector (e.g., Virpil, WinWing, or other SPI grips), the Rhino already reads those buttons natively. You do **not** need RhinoLoopback — just select the correct grip type in the Configurator's **Settings** tab and the buttons will appear.
 
 ### Common Use Cases
 
-- **VKB Grips:** Using VKB grips connected via passthrough cable with the Configurator's hardware force trim feature
-- **External Controllers:** Mapping buttons from gamepads or other devices to control Rhino functions
-- **Flexible Configurations:** Allowing button assignments without rewiring or changing physical connections
+- **VKB Grips:** VKB grips connected via passthrough cable — the VKB base handles button input over USB, and Loopback bridges those buttons to the Rhino for use with hardware force trim or other Configurator functions
+- **External Controllers:** Mapping buttons from a gamepad or secondary USB device to control Rhino functions (e.g., binding a gamepad button to hardware trim release)
+- **Flexible Configurations:** Using a non-grip USB device to trigger Configurator features without rewiring
 
 ### Setup Instructions
 

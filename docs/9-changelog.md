@@ -1,5 +1,9 @@
 # Changelog
 
+- **March 16, 2026:**
+
+    - Added **[Autopilot Oscillation with FFB](1-rhino/4-the-vpforce-telemffb-application.md#autopilot-oscillation-with-ffb)** section documenting DCS autopilot pitch/roll oscillation caused by the simulator's autopilot-FFB feedback loop, with diagnostic steps and workarounds
+
 - **February 27, 2026:**
 
     - Added **Technical Specifications** section to the [Monster Rhino Kitbase](3-third-party-vendors/SR-F_Winger.md) page with motor torque constant (Kt), drive current limit, computed motor shaft torque, and per-gear-ratio peak torque at the stick (~15.2 N·m at 60T/15T, ~18.3 N·m at 72T/15T)
