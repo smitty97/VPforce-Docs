@@ -74,7 +74,7 @@ Because of this, you should design your controls so that their full range of mot
 For most projects, a **10:1 ratio** is the sweet spot. This means the full movement of your controls will turn the motor about 36 degrees. For typical flight sticks or rudder pedals (+/- 15 degrees of movement), this ratio gives you plenty of room within the calibration range.
 
 !!! important
-    Higher gear ratios can be used in multi-turn motor setups, but the system must start with the mechanism positioned so that the encoder is near its electrical center (2048 counts). Otherwise, the absolute position will be ambiguous on power-up, since a single-turn encoder cannot distinguish which motor revolution it’s on.
+    Higher gear ratios that require more than one motor revolution work reliably during operation — the motor driver continuously tracks position across turns once powered on. However, at startup the single-turn absolute encoder cannot determine which revolution the motor is in. The mechanism must be positioned so the encoder reads near its electrical center (2048 counts) before powering on.
 
 Read more about this in the **[Multi-Turn Ambiguity Section][what-is-the-multi-turn-problem]**
 
