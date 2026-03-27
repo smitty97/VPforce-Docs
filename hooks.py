@@ -1,224 +1,13 @@
 """
-MkDocs hooks for post-build image optimization.
-Converts PNG, JPG, and JPEG images to WebP format and updates HTML references.
+MkDocs hooks for post-build processing.
+- WebP image conversion and HTML reference updates
+- External link marking and label paragraph styling
+- Markdown image-to-figure conversion
 """
 
-import os
 import re
-import shutil
 from pathlib import Path
 from PIL import Image
-
-
-# Constants
-NUMBERED_PREFIX_PATTERN = r'^\d+(?:\.\d+)?-'  # Matches patterns like "6-" or "6.5-"
-
-
-def remove_numbered_prefix(text):
-    """
-    Remove numbered prefix from a path segment or filename.
-    Handles both integer (6-) and decimal (6.5-) prefixes.
-    
-    Args:
-        text: String that may contain a numbered prefix
-        
-    Returns:
-        String with numbered prefix removed
-    """
-    return re.sub(NUMBERED_PREFIX_PATTERN, '', text)
-
-
-def on_pre_build(config):
-    """Hook called before the build starts."""
-    pass
-
-
-def fix_html_references(config):
-    """
-    Fix HTML references to images and other assets that were moved.
-    Updates src and href attributes to point to new paths.
-    Handles both absolute and relative path references.
-    Also fixes numbered folder names within paths (e.g., images/3-folder/).
-    """
-    site_dir = Path(config['site_dir'])
-    path_mappings = config.get('path_mappings', {})
-    
-    if not path_mappings:
-        print("[Path Fixing] No path changes detected, skipping HTML reference updates")
-        return
-    
-    print(f"[Path Fixing] Updating HTML references for {len(path_mappings)} moved files...")
-    
-    # Build comprehensive replacement patterns
-    # Include relative paths (../) variants
-    replacement_patterns = {}
-    for old_path, new_path in path_mappings.items():
-        # Direct path
-        replacement_patterns[old_path] = new_path
-        
-        # With leading slash
-        replacement_patterns['/' + old_path] = '/' + new_path
-        
-        # With relative prefix ../
-        replacement_patterns['../' + old_path] = '../' + new_path
-        replacement_patterns['../../' + old_path] = '../../' + new_path
-        replacement_patterns['../../../' + old_path] = '../../../' + new_path
-    
-    html_files = list(site_dir.rglob('*.html'))
-    updated_files = 0
-    total_replacements = 0
-    
-    for html_path in html_files:
-        try:
-            content = html_path.read_text(encoding='utf-8')
-            original_content = content
-            
-            # Update references for each pattern
-            for old_pattern, new_pattern in replacement_patterns.items():
-                # Try different attribute formats
-                replacements = [
-                    (f'src="{old_pattern}"', f'src="{new_pattern}"'),
-                    (f'href="{old_pattern}"', f'href="{new_pattern}"'),
-                    (f"src='{old_pattern}'", f"src='{new_pattern}'"),
-                    (f"href='{old_pattern}'", f"href='{new_pattern}'"),
-                ]
-                
-                for old_attr, new_attr in replacements:
-                    if old_attr in content:
-                        content = content.replace(old_attr, new_attr)
-                        total_replacements += 1
-            
-            # Additional pass: Fix numbered folder names within paths
-            # Pattern: /\d+-[a-z-]+/ anywhere in src/href attributes
-            def clean_numbered_paths(match):
-                """Remove numeric prefixes from path segments."""
-                attr_name = match.group(1)
-                full_path = match.group(2)
-
-                # Do not touch external URLs
-                if re.match(r'https?://', full_path):
-                    return match.group(0)
-
-                # Clean each segment using the DRY helper function
-                segments = full_path.split('/')
-                cleaned_segments = [remove_numbered_prefix(seg) for seg in segments]
-                cleaned_path = '/'.join(cleaned_segments)
-                
-                return f'{attr_name}="{cleaned_path}"'
-            
-            # Apply pattern to src and href attributes
-            new_content = re.sub(
-                r'((?:src|href))="([^"]*\d+-[^"]*)"',
-                clean_numbered_paths,
-                content
-            )
-            
-            if new_content != content:
-                content = new_content
-                total_replacements += 1
-            
-            # Write back if changed
-            if content != original_content:
-                html_path.write_text(content, encoding='utf-8')
-                updated_files += 1
-                
-        except Exception as e:
-            print(f"[Path Fixing] Failed to update {html_path}: {e}")
-    
-    print(f"[Path Fixing] Updated {updated_files} HTML files ({total_replacements} references)")
-
-
-def generate_htaccess(config):
-    """
-    Generate .htaccess file with redirects for renamed URLs.
-    Handles both trailing slash and no trailing slash cases.
-    """
-    site_dir = Path(config['site_dir'])
-    url_redirects = config.get('url_redirects', {})
-    
-    if not url_redirects:
-        print("[Redirects] No URL changes detected, skipping .htaccess generation")
-        return
-    
-    htaccess_path = site_dir / '.htaccess'
-    
-    htaccess_content = """# Auto-generated redirects for URL structure changes
-# Generated by MkDocs hooks.py
-
-RewriteEngine On
-RewriteBase /
-
-# Redirect old numbered paths to clean paths
-"""
-    
-    # Sort redirects for cleaner output and track rules
-    rule_count = 0
-    for old_url, new_url in sorted(url_redirects.items()):
-        # Strip leading slash for RewriteRule
-        old_pattern = old_url.lstrip('/').rstrip('/')
-        new_target = new_url.lstrip('/').rstrip('/')
-        
-        # Add redirect rule for path with trailing slash
-        htaccess_content += f'RewriteRule ^{re.escape(old_pattern)}/$ /{new_target}/ [R=301,L]\n'
-        rule_count += 1
-        
-        # Add redirect rule for path without trailing slash
-        htaccess_content += f'RewriteRule ^{re.escape(old_pattern)}$ /{new_target}/ [R=301,L]\n'
-        rule_count += 1
-    
-    htaccess_path.write_text(htaccess_content)
-    print(f"[Redirects] Generated .htaccess with {rule_count} redirect rules")
-
-
-def rename_output_directories(config):
-    """
-    Physically rename output directories to remove numbered prefixes.
-    This ensures all file paths are consistent.
-    Note: With the on_files hook working correctly, this function may find
-    no directories to rename as MkDocs creates them with clean names.
-    """
-    site_dir = Path(config['site_dir'])
-    
-    # Find all directories with numbered prefixes
-    renamed_count = 0
-    
-    # Walk from deepest to shallowest to avoid path conflicts
-    all_dirs = sorted([d for d in site_dir.rglob('*') if d.is_dir()], 
-                     key=lambda x: len(x.parts), reverse=True)
-    
-    # Count how many have numbered prefixes
-    numbered_dirs = [d for d in all_dirs if re.match(NUMBERED_PREFIX_PATTERN, d.name)]
-    
-    if numbered_dirs:
-        print(f"[Directory Renaming] Found {len(numbered_dirs)} numbered directories to rename")
-        
-        for dir_path in numbered_dirs:
-            dir_name = dir_path.name
-            
-            # Remove the prefix using DRY helper function
-            new_name = remove_numbered_prefix(dir_name)
-            new_path = dir_path.parent / new_name
-            
-            # Rename if target doesn't exist
-            if not new_path.exists():
-                dir_path.rename(new_path)
-                renamed_count += 1
-            else:
-                # Merge directories if target exists
-                for item in dir_path.iterdir():
-                    target = new_path / item.name
-                    if item.is_file():
-                        shutil.move(str(item), str(target))
-                    elif item.is_dir():
-                        if target.exists():
-                            shutil.rmtree(target)
-                        shutil.move(str(item), str(target))
-                dir_path.rmdir()
-                renamed_count += 1
-        
-        print(f"[Directory Renaming] Renamed {renamed_count} directories")
-    else:
-        print("[Directory Renaming] No numbered directories found (on_files hook successfully created clean paths)")
 
 
 def convert_images_to_webp(config):
@@ -387,133 +176,36 @@ def convert_images_to_webp(config):
 def on_post_build(config):
     """
     Hook called after the build completes.
-    Orchestrates all post-build operations:
-    - Directory renaming (remove numbered prefixes)
-    - HTML reference fixing
-    - .htaccess redirect generation
-    - WebP image conversion (skipped in serve mode for performance)
+    - Copies .htaccess to site output (MkDocs ignores dotfiles)
+    - Converts images to WebP format (skipped in serve mode)
     """
     import sys
     import os
-    
-    # Always rename output directories (needed for correct serving)
-    rename_output_directories(config)
-    
-    # Always fix HTML references (needed for correct links)
-    fix_html_references(config)
-    
-    # Always generate .htaccess redirects
-    generate_htaccess(config)
-    
+    import shutil
+
+    # Copy .htaccess if present (MkDocs skips dotfiles)
+    docs_dir = Path(config['docs_dir'])
+    site_dir = Path(config['site_dir'])
+    htaccess_src = docs_dir / '.htaccess'
+    if htaccess_src.is_file():
+        shutil.copy2(str(htaccess_src), str(site_dir / '.htaccess'))
+
     # Skip WebP conversion in serve/livereload mode for performance
-    # Check if we're running mkdocs serve or if MKDOCS_SKIP_WEBP env var is set
     if 'serve' in sys.argv or os.environ.get('MKDOCS_SKIP_WEBP'):
         print("[WebP Conversion] Skipping conversion in livereload mode (use 'mkdocs build' for WebP conversion)")
         return
     
-    # Convert images to WebP format
     convert_images_to_webp(config)
-
-
-def on_files(files, config):
-    """
-    Rename files and folders to remove prefix numbers from the final URL paths.
-    Keeps the numeric prefix in the source for sorting, but removes it from output.
-    Tracks old->new mappings for redirect generation.
-    """
-    url_redirects = {}  # Maps old URL to new URL
-    path_mappings = {}  # Maps old paths to new paths for all files
-    
-    for file in files:
-        # Skip root index.md to avoid permission issues
-        if file.src_path == 'index.md':
-            continue
-            
-        # Process all files in the docs directory
-        if file.src_path:
-            parts = file.src_path.split('/')
-            new_parts = []
-            changed = False
-            
-            # Process each path segment (folders and filename)
-            for part in parts:
-                # Remove numbered prefix using DRY helper function
-                cleaned_part = remove_numbered_prefix(part)
-                if cleaned_part != part:
-                    changed = True
-                new_parts.append(cleaned_part)
-            
-            # Only process if something changed
-            if not changed:
-                continue
-            
-            # Build new destination path - same logic for all file types
-            new_dest_path = '/'.join(new_parts)
-            
-            # For markdown files, adjust to folder/index.html structure
-            if file.src_path.endswith('.md'):
-                filename = new_parts[-1].replace('.md', '')
-                if filename == 'index':
-                    new_dest_path = '/'.join(new_parts[:-1])
-                    if new_dest_path:
-                        new_dest_path += '/index.html'
-                    else:
-                        new_dest_path = 'index.html'
-                else:
-                    new_dest_path = '/'.join(new_parts[:-1] + [filename, 'index.html'])
-            
-            # Store old values for redirect mapping
-            old_dest_uri = file.dest_uri
-            old_url = file.url
-            
-            # Track path mapping for all files (for fixing references)
-            path_mappings[old_dest_uri] = new_dest_path
-            
-            # Update file destination and URL
-            file.dest_uri = new_dest_path
-            
-            # Update dest_path if it exists (some MkDocs versions use this)
-            if hasattr(file, 'dest_path'):
-                file.dest_path = new_dest_path
-            
-            # Update URL for markdown files
-            if file.src_path.endswith('.md'):
-                # Calculate new URL
-                new_url = '/' + new_dest_path.replace('/index.html', '/')
-                
-                # Normalize URL
-                if new_url.endswith('//'):
-                    new_url = new_url[:-1]
-                
-                # Update file URL
-                file.url = new_url
-                
-                # Track redirect mapping
-                old_url_clean = '/' + old_dest_uri.replace('/index.html', '/')
-                if old_url_clean.endswith('//'):
-                    old_url_clean = old_url_clean[:-1]
-                    
-                if old_url_clean != new_url:
-                    url_redirects[old_url_clean] = new_url
-    
-    # Store redirects and path mappings in config for use in on_post_build
-    config['url_redirects'] = url_redirects
-    config['path_mappings'] = path_mappings
-    
-    return files
 
 
 def on_page_content(html, page, config, files):
     """
-    Process HTML content to modify external links.
-    Replaces the mkdocs_external_link_processor plugin functionality.
-    
-    This hook adds a specific class to external links, sets the target attribute
-    for opening links in a new tab/window, and optionally sets the rel attribute
-    for those links. Header anchor links (class="headerlink") are excluded.
+    Process HTML content:
+    - Mark external links with class/target attributes
+    - Mark label-style paragraphs (first node is <strong>) with a CSS class
     """
-    from bs4 import BeautifulSoup
-    
+    from bs4 import BeautifulSoup, Tag
+
     # Configuration (matching plugin settings from mkdocs.yml)
     class_name = 'external'
     target = '_blank'
@@ -521,13 +213,15 @@ def on_page_content(html, page, config, files):
     additional_protocols = ['https:']
     default_protocols = ['http://', 'https://', 'ftp://', 'mailto:', 'tel:', 'www']
     all_protocols = default_protocols + additional_protocols
-    
+
     soup = BeautifulSoup(html, 'html.parser')
+
+    # External links
     for a_tag in soup.find_all('a', href=True):
         # Skip header anchor links
         if 'headerlink' in a_tag.get('class', []):
             continue
-            
+
         href = a_tag['href']
         if any(href.startswith(protocol) for protocol in all_protocols):
             # Add external class
@@ -536,16 +230,112 @@ def on_page_content(html, page, config, files):
                 if not isinstance(classes, list):
                     classes = []
                 a_tag['class'] = classes + [class_name]
-            
+
             # Set target attribute
             if target:
                 a_tag["target"] = target
-            
+
             # Set rel attribute if configured
             if rel:
                 a_tag["rel"] = rel
-    
+
+    # Label paragraphs: first child node (including text) is <strong>
+    for p_tag in soup.find_all('p'):
+        if p_tag.contents and isinstance(p_tag.contents[0], Tag) and p_tag.contents[0].name == 'strong':
+            classes = p_tag.get('class', [])
+            if not isinstance(classes, list):
+                classes = []
+            p_tag['class'] = classes + ['label-paragraph']
+
     return str(soup)
+
+
+PLACEHOLDER_IMAGE = '/images/placeholder.svg'
+
+
+def _img2fig_build_figure(caption, image_link, attr_list, is_index=False):
+    """
+    Build an HTML <figure> element from parsed image components.
+    Prepends '../' to relative image paths for non-index pages (which are
+    served from a subdirectory like page-name/index.html).
+    Index pages are served directly from their directory, so no prefix is needed.
+    """
+    # Skip absolute or protocol-relative URLs (https://, http://, //, data:)
+    if not re.match(r'^(?:https?://|//|data:)', image_link):
+        if not is_index:
+            image_link = ('..' / Path(image_link)).as_posix()
+    if attr_list:
+        attr_list = attr_list.replace('{', '').replace('}', '')
+    else:
+        attr_list = ''
+    return (
+        r'<figure class="figure-image">'
+        rf'  <img src="{image_link}" alt="{caption}" {attr_list}>'
+        rf'  <figcaption>{caption}</figcaption>'
+        r'</figure>'
+    )
+
+
+def on_page_markdown(markdown, page, config, files):
+    """
+    Convert Markdown image syntax to <figure> elements with captions.
+    Replaces the img2figv2 plugin (vendored inline to avoid external dependency).
+    Missing images are replaced with a placeholder and a warning is printed.
+    Linked images [![alt](img)](url) produce a <figure> with <a><img></a> inside.
+    """
+    docs_dir = Path(config['docs_dir'])
+    page_dir = (docs_dir / page.file.src_path).parent
+    is_index = page.file.src_path.endswith('index.md')
+
+    def _resolve_image(image_link):
+        """Check image exists, return resolved link (or placeholder)."""
+        if not re.match(r'^(?:https?://|//|data:)', image_link):
+            clean_link = image_link.split('?')[0].split('#')[0]
+            image_path = (page_dir / clean_link).resolve()
+            if not image_path.is_file():
+                print(f"[Placeholder] Missing image: {image_link} (in {page.file.src_path})")
+                return PLACEHOLDER_IMAGE
+        return image_link
+
+    def _adjust_path(image_link):
+        """Prepend ../ for non-index pages with relative paths."""
+        if not re.match(r'^(?:https?://|//|data:)', image_link):
+            if not is_index:
+                image_link = ('..' / Path(image_link)).as_posix()
+        return image_link
+
+    def _convert_linked_image(match):
+        """Handle [![alt](img)](url) — produce <figure> with clickable image."""
+        caption = match.group(1)
+        image_link = _resolve_image(match.group(2))
+        image_link = _adjust_path(image_link)
+        href = match.group(3)
+        return (
+            f'<figure class="figure-image">'
+            f'  <a href="{href}"><img src="{image_link}" alt="{caption}"></a>'
+            f'  <figcaption>{caption}</figcaption>'
+            f'</figure>'
+        )
+
+    def _convert_image(match):
+        """Handle ![alt](img) — produce <figure> with caption."""
+        caption, image_link, attr_list = match.groups()
+        image_link = _resolve_image(image_link)
+        return _img2fig_build_figure(caption, image_link, attr_list, is_index)
+
+    # First pass: convert linked images [![alt](img)](url)
+    linked_pattern = re.compile(
+        r'\[!\[(.*?)\]\((.*?)\)\]\((.*?)\)', flags=re.IGNORECASE
+    )
+    markdown = re.sub(linked_pattern, _convert_linked_image, markdown)
+
+    # Second pass: convert standalone images ![alt](img)
+    standalone_pattern = re.compile(
+        r'!\[(.*?)\]\((.*?)\)(\{[^\}]*\})?', flags=re.IGNORECASE
+    )
+    markdown = re.sub(standalone_pattern, _convert_image, markdown)
+
+    return markdown
 
 
 

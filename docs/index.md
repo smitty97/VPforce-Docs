@@ -4,7 +4,7 @@ Welcome to the VPForce documentation site!
 
 ## Available Documentation
 
-### [Rhino Stick Base Manual](1-rhino/index.md)
+### [Rhino Stick Base Manual](rhino/index.md)
 
 The comprehensive guide to the VPForce Rhino stick base, covering everything from initial setup to advanced configuration and troubleshooting. Learn about:
 
@@ -16,7 +16,7 @@ The comprehensive guide to the VPForce Rhino stick base, covering everything fro
 - Known issues and legacy documentation
 - DIY build technical considerations including multi-turn encoder challenges
 
-### [Community Projects](2-community-projects/index.md)
+### [Community Projects](community-projects/index.md)
 
 Community-created FFB projects, modifications, and custom builds. Features:
 
@@ -25,15 +25,21 @@ Community-created FFB projects, modifications, and custom builds. Features:
 - Planetary gearbox implementation guides for increased torque
 - Community Rhino base design variations
 
-### [Third-Party Vendors](3-third-party-vendors/index.md)
+### [Third-Party Vendors](third-party-vendors/index.md)
 
 Commercial FFB kit offerings and vendor information:
 
 - SR-F Winger Monster Rhino Kitbase documentation
 - Commercial FFB solutions and product specifications
 
+### [Products](products/index.md)
+
+VPForce product pages with specifications, feature overviews, and purchasing information:
+
+- [Rhino FFB Base](products/rhino-ffb-base.md) — flagship plug-and-play FFB joystick base
+- [DIY Motor Kits](products/diy-kits.md) — 57BLF03, 86BLF03, and 86BLF04 motor kits for custom builds
+
 ## Upcoming Documentation
 
-- **Product Descriptions** - Detailed information about VPForce products and specifications
-- **3D Printable Spare Parts** - Downloadable 3D models for customizable and replaceable components
+- **3D Printable Spare Parts** — Downloadable 3D models for customizable and replaceable components
 - Additional resources and guides coming soon

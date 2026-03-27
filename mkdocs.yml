@@ -1,8 +1,9 @@
-site_name: VPforce Rhino Manual
+site_name: VPforce Documentation
+site_url: 'https://docs.vpforce.eu/'
 site_description: 'Complete documentation for the VPforce Rhino FFB ecosystem.'
 site_author: 'VPforce'
-repo_url: 'https://github.com/walmis/VPforce-Docs'
-edit_uri: blob/master/docs/
+#repo_url: 'https://github.com/walmis/VPforce-Docs'
+#edit_uri: blob/master/docs/
 copyright: 'Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>'
 
 # Documentation directory
@@ -11,28 +12,79 @@ docs_dir: docs
 # Output directory
 site_dir: site
 
+# Navigation structure (ordered by relevance)
+nav:
+  - Welcome: index.md
+
+  - Rhino Manual:
+    - Introduction: rhino/index.md
+    - Getting Started: rhino/getting-started.md
+    - Using the Rhino: rhino/using-the-rhino.md
+    - Game-Specific FFB Settings: rhino/game-specific-ffb-settings-tips-and-tricks.md
+    - Troubleshooting: rhino/troubleshooting-maintenance.md
+    - Maintenance: rhino/rhino-maintenance.md
+    - Known Issues: rhino/appendix-a-known-issues.md
+    - Legacy TelemFFB Docs: rhino/appendix-b-legacy-telemffb-documentation.md
+  - Community Projects:
+    - Introduction: community-projects/index.md
+    - Tips and Tricks: community-projects/tips-and-tricks.md
+    - Community Rhino Builds: community-projects/community-rhino-builds.md
+    - FFB Trim Wheel: community-projects/FFB_TrimWheel.md
+    - FFB Yoke: community-projects/ffb-yoke.md
+    - MFG Crosswind FFB Mod: community-projects/MFG_Crosswind_FFB_Mod_Guide.md
+    - TheAmazinGreat 86 Motor Base: community-projects/theamazingreat-rhino.md
+    - Tiger TPR FFB Mod: community-projects/Tiger_TPR_FFB_Mod_Guide.md
+    - TPR FFB Pedal Mod: community-projects/TPR_FFB_Project_Documentation.md
+  - Third-Party Vendors:
+    - Introduction: third-party-vendors/index.md
+    - Winger Kits:
+      - Monster Rhino: third-party-vendors/winger-kits/SR-F_Winger.md
+    - Kaltokri DIY Kits:
+      - Overview: third-party-vendors/kaltokri-kits/index.md
+      - General FAQ: third-party-vendors/kaltokri-kits/general-faq.md
+      - Rhino Joystick: third-party-vendors/kaltokri-kits/rhinojoystick.md
+      - Pedals > RhinoMFG: third-party-vendors/kaltokri-kits/rhinomfg.md
+      - Pedals > RhinoMFG86: third-party-vendors/kaltokri-kits/rhinomfg86.md
+      - Pedals > RhinoTPR Inside: third-party-vendors/kaltokri-kits/rhinotpr-inside.md
+      - Pedals > RhinoTPR Outside: third-party-vendors/kaltokri-kits/rhinotpr-outside.md
+      - Pedals > RhinoACE: third-party-vendors/kaltokri-kits/rhinoace.md
+      - Pedals > RhinoOrion: third-party-vendors/kaltokri-kits/rhinoorion.md
+      - Pedals > RhinoR1: third-party-vendors/kaltokri-kits/rhinor1.md
+  - TelemFFB: telemffb/index.md
+  - Products:
+    - Overview: products/index.md
+    - Rhino FFB Base: products/rhino-ffb-base.md
+    - DIY Motor Kits: products/diy-kits.md
+    - Grip Adapters: products/grip-adapters.md
+  - Changelog: changelog.md
+
 watch:
   - docs
 
 theme:
-  name: readthedocs
+  name: material
+  #custom_dir: overrides
+  variant: modern
   logo: images/vpforcelogo_dark.svg
-  navigation_depth: 3
-  highlightjs: true
-  hljs_languages:
-    - yaml
-    - python
+  font:
+    text: Inter
+    code: JetBrains Mono
   features:
+    - navigation.instant
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - toc.integrate
   palette:
-    primary: purple
-    accent: amber
+    scheme: default
+    primary: custom
+    accent: custom
 
 # Extra CSS for better rendering of your blockquotes and formatting
 extra_css:
+  - https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap
   - stylesheets/extra.css?v=1.1
+  - stylesheets/vpforce.css
   - https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css
 
 # Extra JavaScript for custom functionality
@@ -50,7 +102,7 @@ markdown_extensions:
   - toc:
       permalink: true
       permalink_title: Link to this section
-      toc_depth: 4
+      toc_depth: 3
       baselevel: 1
       separator: "-"
   - tables
@@ -91,12 +143,13 @@ plugins:
   - enumerate-headings:
       toc_depth: 3
       restart_increment_after: 
-        - 1-rhino/index.md
-        - 2-community-projects/index.md
-        - 3-third-party-vendors/index.md
+        - rhino/index.md
+        - community-projects/index.md
+        - third-party-vendors/index.md
+        - telemffb/index.md
+        - products/index.md
+        - changelog.md
         
-  - img2figv2
-  
 # Hooks for custom processing (image conversion to WebP, external link processing)
 hooks:
   - hooks.py

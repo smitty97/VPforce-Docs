@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# TelemFFB moved from rhino section to top-level
+RewriteRule ^rhino/the-vpforce-telemffb-application(/.*)?$ /telemffb/$1 [R=301,L]
+
+# SR-F_Winger moved under winger-kits subdirectory
+RewriteRule ^third-party-vendors/SR-F_Winger(/.*)?$ /third-party-vendors/winger-kits/SR-F_Winger$1 [R=301,L]

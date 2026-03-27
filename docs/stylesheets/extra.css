@@ -1,207 +1,92 @@
-/* Custom styles for VPforce Rhino Manual */
+/* ============================================================================
+   VPForce Rhino Manual — supplementary styles
+   Loads BEFORE vpforce.css. Only rules not covered by the brand theme belong
+   here. All content selectors are scoped under .md-typeset to avoid bleeding
+   into sidebar, nav, header, or footer.
+   ============================================================================ */
 
-/* Improve blockquote rendering - your document uses blockquotes extensively */
-blockquote {
-    border-left: 4px solid #2196F3;
+/* ── Blockquotes ─────────────────────────────────────────────────────────── */
+.md-typeset blockquote {
+    border-left: 4px solid var(--vp-brand-accent);
     padding: 0.5em 1em;
     margin: 1em 0;
-    background-color: #f5f5f5;
+    background-color: var(--md-default-bg-color--lighter);
     font-size: 0.95em;
 }
 
-blockquote p {
+.md-typeset blockquote p {
     margin: 0.5em 0;
 }
 
-/* Style for nested blockquotes */
-blockquote blockquote {
-    border-left-color: #4CAF50;
-    background-color: #f9f9f9;
+.md-typeset blockquote blockquote {
+    border-left-color: var(--vp-brand-accent-light);
+    background-color: var(--md-default-bg-color--lightest);
 }
 
-/* Better handling of bold text in blockquotes */
-blockquote strong {
-    color: #1976D2;
+.md-typeset blockquote strong {
+    color: var(--vp-brand-accent);
 }
 
-/* Better list styling */
-ul {
-    padding-left: 2em;
-}
-
-li {
-    margin: 0.3em 0;
-}
-
-/* Code blocks */
-code {
-    background-color: #f4f4f4;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.9em;
-}
-
-pre code {
-    background-color: transparent;
-    padding: 0;
-}
-
-/* Image captions and sizing */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1em auto;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 4px;
-}
-
-/* Better table rendering */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0;
-}
-
-table th {
-    background-color: #2196F3;
-    color: white;
-    font-weight: bold;
-    padding: 0.75em;
-    text-align: left;
-}
-
-table td {
-    padding: 0.75em;
-    border-bottom: 1px solid #ddd;
-}
-
-table tr:hover {
-    background-color: #f5f5f5;
-}
-
-/* Anchor links styling */
-a[href^="#"] {
-    text-decoration: none;
-}
-
-/* Section headings */
-h1, h2, h3, h4 {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-}
-
-h1 {
-    border-bottom: 2px solid #2196F3;
-    padding-bottom: 0.3em;
-}
-
-/* Better rendering of definition lists */
-dt {
+/* ── Definition lists ────────────────────────────────────────────────────── */
+.md-typeset dt {
     font-weight: bold;
     margin-top: 1em;
-    color: #1976D2;
+    color: var(--vp-brand-accent);
 }
 
-dd {
+.md-typeset dd {
     margin-left: 2em;
     margin-bottom: 1em;
 }
 
-/* Admonition boxes for notes, warnings, etc. */
-.admonition {
-    margin: 1em 0;
-    padding: 1em;
-    border-radius: 4px;
-    border-left: 4px solid;
-}
-
-.admonition.note {
-    border-left-color: #2196F3;
-    background-color: #E3F2FD;
-}
-
-.admonition.warning {
-    border-left-color: #FF9800;
-    background-color: #FFF3E0;
-}
-
-.admonition.danger {
-    border-left-color: #F44336;
-    background-color: #FFEBEE;
-}
-.admonition.tip {
-    border-left-color: rgb(33, 224, 186);
-    background-color: #E8F5E8;
-}
-
-.admonition.important {
-    border-left-color: #FFD54F;
-    background-color: #FFFDE7;
-}
-
-.admonition.important > .admonition-title {
-    background-color: #ffe697;
-    color: #333;
-    font-weight: bold;
-}
-
-/* Print styles */
-@media print {
-    blockquote {
-        page-break-inside: avoid;
-    }
-    
-    img {
-        page-break-inside: avoid;
-    }
-    
-    h1, h2, h3 {
-        page-break-after: avoid;
-    }
-}
-
-.wy-side-nav-search {
-    display: block;
-    width: 300px;
-    padding: .809em;
-    margin-bottom: .809em;
-    z-index: 200;
-    background-color: #381546;
-    text-align: center;
-    color: #fcfcfc;
-}
-
-figcaption {
+/* ── Figure captions ─────────────────────────────────────────────────────── */
+.md-typeset figcaption {
     text-align: center;
     font-size: 0.9em;
-    color: #555;
+    color: var(--md-default-fg-color--light);
     margin-top: 0.3em;
     font-style: italic;
 }
 
-/* External link indicator
-   Adds a small NE-arrow after external links (links processed by
-   mkdocs_external_link_processor are given the class `external`).
-*/
+/* ── External link indicator ─────────────────────────────────────────────── */
+/* Links processed by mkdocs_external_link_processor get class `external`.   */
 a.external::after {
-    /* support multiple FA family names (v4/v5/v6) */
     font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", "FontAwesome", "fontawesome-webfont";
-    content: "\f08e"; /* external-link glyph */
+    content: "\f08e";
     display: inline-block;
-    margin-left: 0.28em; /* spacing after link text */
+    margin-left: 0.28em;
     font-size: 0.85em;
     line-height: 1;
     vertical-align: text-top;
-    font-weight: 900; /* for FA5/6 solid family; harmless if not used */
+    font-weight: 900;
     speak: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #666;
+    color: var(--md-default-fg-color--lighter);
 }
 
-/* Make sure external-icon spacing looks good in small text */
 a.external code::after,
 a.external .btn::after {
     margin-left: 0.15em;
+}
+
+/* Hide external-link icon when the link wraps an image */
+a.external:has(img)::after {
+    display: none;
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+    blockquote {
+        page-break-inside: avoid;
+    }
+
+    img {
+        page-break-inside: avoid;
+    }
+
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+}
 }

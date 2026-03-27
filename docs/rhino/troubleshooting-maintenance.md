@@ -1,0 +1,925 @@
+
+# Troubleshooting
+
+!!! info "Need Help? Getting Effective Support"
+    Before asking for help, see **[How to Get Effective Support][how-to-get-effective-support]** at the end of this document for guidance on providing complete information that leads to faster diagnosis and resolution.
+
+## General Troubleshooting Steps
+
+Before diving into specific issues, try these general troubleshooting steps that resolve many common problems:
+
+### Reset to Factory Defaults
+
+If you're experiencing unexpected behavior, instability, or effects issues, resetting to factory defaults is an excellent first troubleshooting step:
+
+1. Open **VPforce Configurator**
+2. Click **"Factory Reset"** button
+3. Click **"Import Rhino Defaults"** button
+4. Click **"Store Settings"** to save
+
+This ensures you're working with known-good baseline settings and eliminates configuration issues as a potential cause.
+
+!!! tip "When to Factory Reset"
+    Factory reset is particularly useful when:
+    
+    - Effects feel wrong or inconsistent
+    - After firmware updates
+    - Before testing new configurations
+    - When troubleshooting stability issues
+
+## Power Issues
+
+### Base Does Not Power On At All
+
+**Issue:**  
+The Rhino base shows no signs of life - no LED indicators, no response when connected, and does not appear in Windows Device Manager or VPforce Configurator.
+
+**Understanding Rhino's Power System:**
+
+The Rhino has two separate power systems:
+
+1. **USB Power (5V):** Powers the control electronics, USB communication, and status LEDs
+2. **DC Power (20V):** Powers the motors and drive electronics
+
+If the base does not power on at all, the USB power path is the most likely culprit.
+
+#### Quick Troubleshooting Checklist
+
+Before diving into detailed diagnostics, try these essential steps:
+
+1. **Verify USB connection** - Ensure the USB cable is firmly seated and try a different USB cable if available
+2. **Try different USB ports** - Test multiple USB ports (rear panel preferred over front panel)
+3. **Eliminate USB hubs** - Disconnect any USB hubs and connect the Rhino directly to a motherboard USB port
+4. **Check Device Manager** - Press `Win + X` and open **Device Manager** to verify Windows detects the device
+5. **Test DC power connection** - Verify the DC barrel jack is firmly seated on the back of the Rhino
+
+!!! tip
+    For more detailed USB troubleshooting steps and solutions, see the **[USB Connection Issues](#usb-connection-issues)** section below. This section covers comprehensive diagnostic procedures and explains common causes for each symptom.
+
+#### Common Causes and Solutions
+
+**1. Faulty USB Cable**
+
+USB cables are a frequent point of failure, particularly if subjected to repeated bending or tension:
+
+- **Verification:** Test the cable with another USB device (mouse, keyboard, etc.)
+- **Solution:** Replace with a high-quality USB cable (USB 2.0 is sufficient; keep cable under 3 meters)
+
+**2. USB Port Issues**
+
+Some motherboard USB ports have poor power delivery or signal integrity:
+
+- **Solution:** Test multiple USB ports systematically and prefer motherboard rear-panel USB ports over front-panel ports
+- Front-panel ports often have longer internal cables and higher insertion losses
+
+**3. USB Hub Power Delivery**
+
+USB hubs, especially unpowered hubs, can fail to provide adequate power:
+
+- **Solution:** Always connect the Rhino directly to a motherboard USB port
+- If a hub is absolutely necessary, use a powered USB hub with external power supply
+
+**4. Electrical Noise or Ground Loops**
+
+Electrical noise from the PC's USB bus can prevent proper device recognition:
+
+- **Solution:** Use a **USB isolator** to eliminate noise (see **[USB Isolator Recommendation](#usb-isolator-recommendation)** section)
+- This is particularly effective in systems with many high-power devices
+
+**5. DC Power Connection Issue**
+
+Even with USB detection, a loose DC connection can prevent the device from initializing:
+
+- **Solution:** Firmly reseat the DC barrel jack connector on the back of the Rhino
+- Ensure DC power is being supplied to the board (the board should initialize after USB detection)
+
+**6. Mainboard Damage (Rare)**
+
+In very rare circumstances, the Rhino mainboard can be damaged by:
+
+- Electrostatic discharge (ESD) during handling
+- Ground loops between PC and power supply
+- Voltage transients on the USB bus
+
+- **Solution:** If all troubleshooting steps fail and you've verified the USB cable, ports, and DC connection are good, the mainboard may be damaged
+- Contact VPforce support for further diagnostics and potential RMA
+
+---
+
+### Device Powers On But Motors Have No Power
+
+**Issue:**  
+The Rhino appears in Windows and VPforce Configurator shows the device connected, but the motors remain unpowered. The stick feels completely limp, and FFB effects have no effect. Motor status may show `OFFLINE` or `FAULT_UNDERVOLTAGE`.
+
+**Understanding the Problem:**
+
+This scenario indicates the **USB power path is working** (electronics are powered), but the **DC power path (20V) is faulty**. The motors require 20V DC to operate, supplied by an external power supply.
+
+#### Quick Troubleshooting Checklist
+
+1. **Check power supply LED** - Verify the PSU is powered and LED is illuminated
+2. **Measure PSU output** - Using a multimeter (if available), measure ~20V at the PSU DC connector
+3. **Inspect DC connections** - Ensure the DC barrel jack on the Rhino is firmly seated
+4. **Check DC cable** - Look for visible damage, kinks, or loose connectors
+5. **Test with known-good PSU** - If available, try a different 20V power supply to isolate the problem
+
+#### Common Causes and Solutions
+
+**1. Faulty Power Supply**
+
+Power supplies can fail over time, particularly under sustained high-current loads:
+
+- **Symptoms:** No voltage output, voltage significantly below 20V, or voltage drops dramatically under load
+- **Verification:** Measure PSU output with multimeter (should read ~20V DC)
+- **Solution:** Replace with a known-good 20V power supply (6-8A minimum capacity recommended)
+
+**2. Poor DC Connector Contact**
+
+The DC barrel jack can become loose or develop poor contact over time:
+
+- **Symptoms:** Intermittent motor power, motors work sometimes but not others, vibrations cause power loss
+- **Verification:** Ensure connector is firmly seated; wiggle it gently to check for play
+- **Solution:** Reseat the DC connector firmly; if problem persists, replace the DC cable or jack
+
+**3. Faulty DC Cable**
+
+DC cables can develop internal breaks or high resistance:
+
+- **Symptoms:** Voltage present at PSU but not at Rhino, intermittent operation depending on cable position
+- **Verification:** Measure voltage at both PSU output and Rhino DC input to compare
+- **Solution:** Replace DC cable with a known-good cable (18AWG or heavier recommended)
+
+**4. Failing E-Stop Switch**
+
+E-Stop switches can develop high internal resistance or fail to make contact:
+
+- **Symptoms:** `FAULT_UNDERVOLTAGE` errors, motors intermittently lose power, voltage sag under load
+- **Verification:** Check if E-Stop is engaged or bypass it temporarily to test
+- **Solution:** Replace E-Stop switch if bypassing resolves the issue
+
+**5. Insufficient PSU Capacity**
+
+Power supply may not provide sufficient current for high-torque FFB operation:
+
+- **Symptoms:** Voltage correct at idle but drops under load, motors work at low forces but fault at high forces, `FAULT_UNDERVOLTAGE` during intense FFB
+- **Verification:** Measure voltage while activating test FFB effects in Configurator
+- **Solution:** Upgrade to higher-capacity power supply (8A or higher recommended)
+
+!!! important "Ground Loops and Electrical Noise"
+    Poor DC connections can introduce ground loops that cause both power delivery issues and USB instability. If you experience both motor power issues and USB connection issues simultaneously, inspect DC connections first—fixing the DC path often resolves USB issues as well.
+
+#### Verification After Repairs
+
+After applying a fix, verify the solution:
+
+1. **Measure DC voltage** - Should read ~20V with no load, remain above 18V under typical FFB load
+2. **Check motor status in Configurator** - Should show `RUNNING`, not `OFFLINE` or `FAULT_UNDERVOLTAGE`
+3. **Test FFB effects** - Activate test effects and verify motors respond consistently with appropriate force
+
+
+## USB Connection Issues
+
+**Issue:**
+The Rhino exhibits intermittent connection problems, instability, or appears to disconnect and reconnect frequently. This typically manifests as effects stuttering, dropping out momentarily, or the device appearing offline in VPforce Configurator.
+
+**Why USB Communication Matters for FFB:**
+
+The Rhino FFB joystick communicates using high-frequency bidirectional data. Unlike a standard joystick that just sends "X and Y" coordinates, an FFB stick is constantly receiving "Force" instructions from the sim while sending "Position" data back. Any interruption in this communication—even brief pauses from USB throttling or power management—can cause jerky motion, lag, freezing, or complete sim lockup. This is why USB connection quality is critical for smooth FFB operation.
+
+**Common Causes & Solutions:**
+
+Check the following items in order:
+
+1. **USB Hub**
+
+    - If you are currently using a USB hub, disconnect it and connect the Rhino directly to your PC
+    - USB hubs can introduce latency, power delivery issues, and signal integrity problems
+    - Test the direct connection for stability
+
+2. **USB Port**
+
+    - Try a different USB port on your PC
+    - Some USB ports have better power delivery or less electrical noise than others
+    - Test multiple ports to identify if the issue is port-specific
+    - If available, try USB 3.0/3.1 ports (blue ports) rather than USB 2.0 (black ports)
+
+3. **USB Cable**
+
+    - Try a different USB cable if possible
+    - USB cables can degrade over time or have internal damage
+    - A faulty cable is a common cause of intermittent connection issues
+
+4. **DC Power Plug**
+
+    - Inspect the DC power connector on the back of the Rhino
+    - If the DC power plug pulls out easily or feels loose, vibrations during operation might be causing intermittent power connection loss
+    - Poor DC connections can also introduce ground loops, causing electrical noise and instability
+    - Ensure the power plug is firmly seated and making good contact
+    - This is a frequent cause of instability during intense FFB effects
+
+!!! tip
+    If you have access to multiple USB cables and ports, systematically test each combination. Document which configuration is most stable—this can help identify whether the issue is related to your specific port, cable, or something else entirely.
+
+!!! important
+    Once you have confirmed a stable connection with direct PC connection and a known-good cable/port, the instability is likely resolved. If problems persist, the device itself may have a hardware issue and should be checked by support.
+
+### USB Isolator Recommendation
+
+As a best practice or if you continue to experience intermittent connection issues after testing the above steps, or if your PC has noisy USB power delivery, consider using a **USB isolator**. A USB isolator is a device that sits between your PC and the Rhino, providing electrical isolation that eliminates ground loop noise and reduces EMI (electromagnetic interference) that can cause connection instability.
+
+![AduM3160 based USB isolator](images/troubleshooting-maintenance/image.png){ width="250" }
+
+Benefits of a USB isolator:
+
+- Eliminates ground loops between the PC and the Rhino
+- Protects electronics from voltage spikes and transient faults on the USB bus
+- Can resolve connection issues in systems with high electrical noise (common in gaming rigs with multiple high-power devices)
+
+This is a proven solution for users experiencing persistent USB stability issues, particularly in systems with many power-hungry components.
+
+**Where to Find USB Isolators:**
+
+Search for **AduM3160** isolator boards on AliExpress, Amazon, or other electronics retailers. The AduM3160 is a popular, affordable USB 2.0 isolator IC commonly available on ready-made isolator boards. When searching, look for:
+
+- "AduM3160 isolator board" or "USB isolator AduM3160"
+- Pre-assembled USB isolator modules (no soldering required)
+- Boards with both USB-A connectors or USB-A to USB-C options
+
+Cost is typically low (under $10-20 USD), making it an economical troubleshooting step if you suspect USB noise issues.
+
+### Disable USB Selective Suspend
+
+**Issue:**  
+Windows can automatically suspend USB ports to save power, causing the USB port to be "throttled" and resulting in system performance issues. Symptoms include jerky motion in VPforce Configurator, sim freezes or lockups, and system sluggishness when the Rhino is connected.
+
+**Solution:**
+
+Windows USB Selective Suspend can be disabled through Power Options. Follow these steps:
+
+1. Open **Power Options**:
+    - Right-click the battery/power icon in the taskbar
+    - Select **Power settings** or go to **Settings** → **System** → **Power & battery**
+
+2. Click **Advanced power settings** (or **Power Options** if in classic settings)
+
+3. Click **Change plan settings** for your current power plan
+
+4. Click **Change advanced power settings**
+
+5. Expand **USB settings** in the list
+
+6. Expand **USB selective suspend setting**
+
+7. Set the value to **Disabled** for both "On battery" and "Plugged in"
+
+8. Click **Apply** → **OK**
+
+9. **Restart your PC** for the change to take effect
+
+10. Reconnect the Rhino and verify the issue is resolved
+
+!!! tip
+    If you have multiple power plans (Balanced, High Performance, Power Saver), ensure you disable USB Selective Suspend for all of them, or switch to a plan where it is already disabled.
+
+## WinUSB / WebUSB Firmware Update Issues
+
+### Legacy Firmware WebUSB Issue (1.0.16 and older)
+
+**Issue:**
+On **Windows 10/11** with **firmware 1.0.16 and older**, the Rhino may appear correctly in Windows, but **WinUSB fails to operate**, preventing firmware updates through WebUSB. Users may see `network error`s in the WebUSB tool. This problem is fixed in newer firmwares.
+
+You can apply a simple registry fix to restore WebUSB functionality. This requires administrative privileges.
+
+**Steps:**
+
+- Press **Start**, type PowerShell, right-click **Windows PowerShell**, and select **Run as administrator**.
+- Paste the following command and press **Enter**:
+    `HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\VID_FFFF&PID_2055&MI_03\\\*\\DeviceParameters\" -Name \"DeviceInterfaceGUID\" -Value`
+- **Unplug** the Rhino from the USB port and **plug it back in**.
+- Test the connection in the WebUSB tool - firmware updates should now work as expected.
+
+!!! note
+    - This workaround only applies to **firmware 1.0.16 and older**. Updating the latest firmware will remove the need for this registry modification.
+    - Only run the command exactly as provided; editing the registry incorrectly can cause system issues.
+
+### WinUSB Driver Conflicts and Cleanup
+
+Many Windows systems handle Rhino’s WebUSB interface without any special setup. Others don’t. The difference usually comes down to what Windows has stored from past hardware or software. Windows keeps old USB drivers in its internal driver store, and sometimes it silently reuses those drivers for new devices. If one of those older drivers isn’t compatible with WebUSB, Rhino may get matched to the wrong driver and the browser will show connection or “network” errors even though the device is working correctly in Configurator or game itself. The steps below clear out these leftover drivers so Windows can load the correct Microsoft WinUSB driver that WebUSB needs.
+
+If you encounter WebUSB connection issues, driver conflicts from previous installations (particularly from Zadig or other USB tools) may be preventing proper WinUSB operation. Follow these steps to clean up conflicting drivers and restore proper WebUSB functionality.
+
+#### Quick Reset (try this first)
+
+1. Disconnect Rhino from the PC
+2. Reboot Windows
+3. Connect Rhino directly to a USB port on the PC (not a hub)
+4. Test WebUSB connection
+
+If errors persist, continue with the full driver cleanup procedure below.
+
+#### Full Driver Cleanup Procedure
+
+**Step 1: Remove old Rhino drivers from Device Manager**
+
+1. Open Device Manager (Win + X)
+2. View → Show hidden devices
+3. Expand "Universal Serial Bus devices", "USB devices", "Other devices", and "LibUSB" (if present)
+4. Right-click every entry related to "Rhino DFU" or showing your device's VID/PID → Uninstall device
+5. If Windows shows a checkbox "Delete the driver software for this device", enable it before uninstalling
+
+Leave Device Manager open for now.
+
+**Step 2: Clean driver packages from Windows driver store (optional)**
+
+!!! warning "Advanced Procedure"
+
+    The following driver cleanup steps involve modifying Windows driver store using command-line tools. **This procedure is intended for advanced users** who are comfortable with administrative command-line operations. Incorrectly removing driver packages can affect other USB devices on your system. If you are not confident with these steps, you can skip to step 3.
+
+1. Open Start → type "cmd" → right-click → Run as administrator
+2. List all driver packages:
+
+```
+pnputil /enum-drivers > %temp%\drivers.txt
+```
+
+3. Open the file:
+
+```
+notepad %temp%\drivers.txt
+```
+
+4. In the list, look for driver entries that mention:
+    - Rhino
+    - Your device VID_FFFF / PID_205*x*
+    - WinUSB
+    - libusb
+    - libusbK
+    - libwdi
+
+Each entry shows something like `Published name: oem47.inf`.
+
+5. For each matching driver, run:
+
+```
+pnputil /delete-driver oem47.inf /force /uninstall
+```
+
+Replace `oem47.inf` with the actual name. If Windows says "driver is in use", unplug the device and run the command again.
+
+**Step 3: Remove ghost interfaces**
+
+Back in Device Manager:
+
+1. View → Show hidden devices
+2. Remove any greyed-out duplicates of "Rhino DFU" or anything matching VID/PID
+3. Unplug the device after cleaning
+
+**Step 4: Reboot Windows**
+
+A clean reboot ensures Windows forgets cached bindings.
+
+**Step 5: Reconnect Rhino and verify WinUSB installation**
+
+Plug in Rhino. Windows should now load Microsoft's built-in WinUSB (winusb.sys) automatically.
+
+Verify correct driver:
+
+1. Device Manager → open "Rhino DFU" device → Properties
+2. Driver tab should show:
+    - Provider: Microsoft
+    - Driver file: winusb.sys
+
+#### Forcing Windows to Use WinUSB (if automatic installation fails)
+
+If Windows picks the wrong driver, manually bind WinUSB:
+
+1. Right-click "Rhino DFU" in Device Manager → Update driver
+2. Choose "Browse my computer for drivers"
+3. Choose "Let me pick from a list of available drivers"
+4. Select "Universal Serial Bus devices"
+5. Pick "WinUSB Device" or "USB Device (WinUSB)" depending on Windows version
+6. Install
+
+This uses Microsoft's own signed WinUSB and does **not** require Zadig or third-party tools.
+
+#### Browser Cleanup
+
+After correcting the driver:
+
+1. Chrome/Edge → Settings → Privacy → Site settings → USB devices → Clear permissions for WebUSB tool
+2. Clear site data for the WebUSB domain
+3. Test connection in a fresh tab or Incognito window
+
+!!! warning "Important: Avoid Zadig for Rhino"
+
+    Zadig and similar USB driver replacement tools can cause persistent driver conflicts with the Rhino. These tools leave fingerprints in the Windows driver store that can prevent proper WinUSB operation even after uninstalling. If you previously used Zadig with Rhino, follow the full driver cleanup procedure above to remove all traces.
+
+
+## Motor LED Indicators
+
+Each motor has an integrated driver with a status LED that provides diagnostic information through flash patterns:
+
+- **Green flashes** — indicate the assigned **motor ID**:
+
+    - **1 flash** = Motor ID 0 (pitch / X-axis)
+    - **2 flashes** = Motor ID 1 (roll / Y-axis)
+
+- **Red flashes** — indicate a **fault condition**. Check the Configurator status bar for the specific fault code (see [Motor Faults](#motor-faults) below).
+
+- **LED normally OFF, brief blink every few seconds** — the motor has power but is not actively communicating with the Rhino main board. 
+
+## Motor faults
+
+### FAULT_UNSTABLE
+
+**Issue:**
+The Rhino reports a `FAULT_UNSTABLE` error. This fault typically occurs suddenly, often preceded by an audible thump or impact sensation from the device.
+
+!!! note
+    The device's fault message usually identifies which motor (or axis) triggered the fault. Check the indicated motor/axis first — it typically points straight to the side that needs inspection.
+
+**Cause:**
+This fault is most commonly caused by **belt slippage** on either the X-axis or Y-axis. When the belt connecting a motor to its pulley loses tension or alignment, the motor and pulley can slip relative to each other. The sudden slip causes the Rhino to detect an unexpected position change that doesn't match the expected motor command, triggering the stability check and generating the fault. The audible thump is often the moment when slippage occurs.
+
+**Resolution:**
+
+1.  **Check belt tension:** Inspect the axis belt which produced the fault. The belts should be firm but not over-tightened.
+
+2.  **Re-tighten if necessary:** If either belt is loose, carefully tighten it to restore proper tension. See the **[Belt Tensioning Guide][re-tightening-the-belts]** for detailed instructions.
+
+4.  **Run Auto Calibration:** After adjusting tension and alignment, launch the VPforce FFB Configurator and run **Auto Calibration** from the **Settings** tab.
+
+5.  **Verify calibration values:** Once calibration completes, check the calibration values. You should see values around **C:~2000** for both axes. If the values are significantly different, the belts may need further adjustment.
+
+### FAULT_UNDERVOLTAGE
+
+**Issue:**  
+The Rhino reports a `FAULT_UNDERVOLTAGE` error when supply voltage drops below 8 volts.
+
+**Cause:**  
+This fault protects motor drivers by halting operation when voltage is insufficient. The 8V threshold ensures reliable operation and prevents damage.
+
+**Under load** (during active force feedback or high-torque movements):
+
+- Poor electrical connection (loose or corroded power connector, high resistance in power path)
+- Failing power supply (unable to maintain voltage during peak current draw)
+- Insufficient PSU capacity (power supply rated below recommended specifications)
+- Failing E-Stop switch (high internal resistance or intermittent disconnection)
+
+**At idle** (no force feedback active):
+
+- E-Stop pressed (normal behavior: motor power cut momentarily shows fault until capacitors discharge, then motor status shows `OFFLINE`)
+- Faulty PSU (unable to maintain stable output without load)
+
+**Resolution:**
+
+1. **Check power connections:** Inspect PSU cables and connectors. Ensure tight, clean, corrosion-free connections.
+
+2. **Verify PSU output voltage:** Measure PSU output voltage with multimeter under no load. Should match rated voltage.
+
+3. **Test under load:** Monitor PSU voltage during typical Rhino operation. Significant voltage sag indicates insufficient PSU capacity or poor connections.
+
+4. **Replace or upgrade PSU:** If power supply cannot maintain adequate voltage under load, replace with higher-capacity unit. 
+
+
+## Game Specific Troubleshooting
+
+Various items can cause issues with FFB depending on the sim in question. This section will cover common issues and basic troubleshooting steps that can be used to identify and fix the problem. This section is a living list that will be updated as new issues/causes/solutions are identified.
+
+### DCS
+
+By default, the Spring effect, which is the primary 'FFB' effect type, is owned and managed by DCS. The TelemFFB application does not alter the spring effect unless one of the several override options are enabled.
+
+If FFB is not working, follow the below procedure:
+
+!!! note
+    This procedure assumes you have already confirmed that your Rhino is connected and working properly with VPforce Configurator and that you can feel FFB effects when using the Configurator's test effects.
+
+!!! important
+    DCS does not generate any active FFB effects until you are loaded into an aircraft. Simply being in the main menu or mission editor will deactivate any *Spring* effect set in the *VP Configurator* --- therefore the joystick will remain limp.
+
+#### Ensure FFB is enabled in the DCS Misc. settings
+
+1.  Even with FFB disabled, DCS will create a disabled FFB effect (which renders the joystick limp). However, it will never 'start' the effect, so it remains limp even after loading into an aircraft.
+
+    ![](media/Pictures/10000000000002E4000001B190CAE179096BC625.png){ width="330px" height="193px" }
+
+2.  Ensure the 'FF Tune' settings for the axes are non zero and at the value you intend (default is %100 and recommended to keep it at %100)
+
+    1. This involves going into a modules' axis settings, ensuring '**Foldable View**' is disabled, **selecting the axis binding** and then choosing the **'FF Tune'** button at the bottom.
+
+    ![](media/Pictures/100000000000076700000457F84F5FD3291D9858.png){ width="563px" height="330px" }
+
+    2. This is the 'strength' of the spring effect that DCS will use for that axis for that aircraft. Recommended to leave it at %100
+
+#### Test without TelemFFB running
+
+1.  **If the issue persists, TelemFFB is not at fault. Proceed to next step**
+
+2.  If the issue goes away, likely some configuration inside TelemFFB is causing it.
+
+    1. Check the '**Active Effects**' panel on the TelemFFB **Monitor **page. Look for any spring override type effects and disable any which are active.
+
+    ![](media/Pictures/1000000000000174000000BC120619318D732D8E.png){ width="251px" height="127px" }
+
+    2. If the cause is one of the effects, please read the documentation for the effect and ensure you understand its use and purpose. All of the TelemFFB override type effects have very specific use cases.
+
+    3. If no active effects are causing the issue, check to see if you are pushing a VPforce Configurator profile or are using the Configurator Gains override feature.
+    ![](media/Pictures/10000000000001EB00000135D1501E27D3966190.png){ width="361px" height="227px" }
+        - Both of these options could make it seem like FFB is not working. If you are setting the **master gain** or **spring gain** to 0 with configurator overrides, or you are pushing a configurator profile with 'sticky spring' or the spring gain slider turned down, it will seem as if "FFB is not working"
+
+    4. If TelemFFB has been determined to be the cause, but the above steps did not reveal the issue, reach out to the **#TelemFFB-User** channel on the VPforce discord
+
+#### Check your configurator settings
+
+1.  Make sure that your master-gain and spring gain sliders are nonzero and are high enough that you feel the spring force you are expecting. These sliders define the maximum force that the Rhino can generate and if they are low/zero, it does not matter what the game sets the spring effect at, it will be no stronger than the combination of those sliders.
+
+![](media/Pictures/100000000000036A000001EFC90C9CFFE8CF22DC.png){ width="319px" height="181px" }
+
+2. Make sure you do not have **'Sticky' **enabled in the spring effect on the VPforce configurator **'Effects' **tab.
+    -  This option tells the Rhino to ignore the spring effect from the game and use the one that is configured there in the Effects tab.
+    ![](media/Pictures/100000000000015E0000010B2550517A4501EE8D.png){ width="242px" height="184px" }
+
+3.  If the issue is with in-game trimming, ensure you do not have '**Override Trim'** enabled in the hardware force trim section of the VPforce Configurator **Effects **tab
+    -  This option tells the Rhino to ignore the spring center information from the game and control the spring center using the hardware trim bindings in the Effects tab
+
+    ![](media/Pictures/1000000000000130000001104C509358CB3EC220.png){ width="239px" height="214px" }
+
+
+4.  Check your **potentiometer settings**.
+
+    -  Make sure the Pot#1 (and 2, if applicable) are configured as you intend and that the current values are what you expect. If your Pot is configured for Master Gain or Spring Gain and turned all the way down, FFB will seem to *not work*.
+
+![](media/Pictures/1000000000000374000002AE7C4FC959873320DB.png){ width="493px" height="383px" }
+
+#### Check for 3rd party app issues
+
+1. **vJoy**
+
+    1. vJoy is known to cause issues with FFB, particularly if the FFB options are enabled, which they typically are by default when vJoy is installed.
+    ![](media/Pictures/10000000000001A50000010DF11606F6D888B57D.png){ width="299px" height="191px" }
+
+    2. **SimHaptics** by rKApps
+
+        - SimHaptics has an '**Auto Start**' feature that is known to break FFB for DCS. The app tries to start at the same time the aircraft in DCS is loading and this somehow interferes with DCS starting the FFB Spring effect.
+
+2. **DCS Force Feedback Fix — dinput8 wrapper**
+
+    A community-developed, open-source DirectInput wrapper DLL that solves two persistent DCS FFB problems:
+
+    - **FFB sent to wrong devices** — DCS can route force feedback commands to unintended devices such as vJoy, pedals, a collective axis, or a steering wheel. The wrapper lets you block FFB for specific devices by name, so only your actual FFB joystick receives forces.
+    - **FFB dies after USB reconnect** — If the FFB joystick disconnects mid-mission (USB replug, firmware update, etc.), DCS re-creates the device but does not restart the force effects. Spring centering and trim forces go dead until the mission is restarted. The wrapper tracks active effects and automatically restores them after reconnect.
+
+    **Setup:**
+
+    1. Download `dinput8.dll` and `dinput8.ini` from the [releases page](https://github.com/walmis/dcs-force-feedback-fix/releases).
+    2. Drop both files into your DCS `bin-mt` folder (next to `DCS.exe`).
+    3. Edit `dinput8.ini` to block unwanted devices.
+    4. Launch DCS — check `dinput8_wrapper.log` for detected device names and details.
+
+    **Example `dinput8.ini` configuration:**
+
+    ```ini
+    [FFBDevices]
+    vJoy=block          ; Block all FFB for any device with "vJoy" in the name
+    Pedals=block        ; Block FFB for any device with "Pedals" in the name
+    Collective=block    ; Block collective FFB for helicopters
+    ```
+
+    Source code and releases: [github.com/walmis/dcs-force-feedback-fix](https://github.com/walmis/dcs-force-feedback-fix)
+
+6.  **The Nuclear Test**
+
+    If all of the above fails to reveal the issue, try with a fresh Saved Games folder. This will remove any active mods, or any 3rd party app that makes use of the DCS export environment as a potential cause of the issue
+
+    1.  Close DCS and rename your 'DCS' (or whatever is active) saved games folder to something like 'DCS.backup'
+
+    2.  Start DCS. It will create a completely clean 'DCS' folder with no mods, export scripts or even bindings.
+
+    - Here you can choose to copy your bindings from the `config/input` folder in your real DCS.backup folder over to the new test folder. Restart DCS after doing so
+
+#### Autopilot Misbehaving or Disengaging Unexpectedly
+
+**Issue:**  
+Autopilot systems (altitude hold, heading hold, or other AP modes) behave erratically, continuously pitch/roll in one direction, or disengage unexpectedly shortly after engagement. This problem occurs frequently but may occasionally work correctly, making diagnosis difficult. Common in the F-14 Tomcat, but can affect any aircraft with autopilot computers.
+
+**Root Cause:**  
+Many aircraft autopilot systems interpret a mismatch between the in-game trim point and the physical stick position as a **hands-on override** — the pilot intentionally taking control. When the physical stick position doesn't match the trimmed neutral point, the autopilot computer detects this as pilot input and either fights the stick position or disengages entirely.  
+
+Aircraft with offset control mechanics (like the F-14 Tomcat, which has forward-offset by design) are particularly susceptible. When autopilot engages or commands trim adjustments, any offset between trim point and stick position causes the autopilot to treat it as active pilot input, leading to erratic behavior or immediate disengagement.
+
+**Diagnostic Steps:**
+
+1. Enable the **Input Overlay** in DCS:
+
+    - Press `RCtrl + Enter` (Right Control + Enter)
+    - This displays stick position and trim offset in real-time
+    - The overlay shows the physical stick position and the current trim point
+
+2. Observe stick position vs. trim point:
+
+    - Watch the input overlay while the issue occurs
+    - Check if the stick closely follows the trimmed point offset
+    - If the stick lags behind the trim point → autopilot interprets the mismatch as pilot override
+    - The autopilot sees this offset as intentional pilot input and either fights it or disengages
+
+**Solutions:**
+
+1. **Enable Adaptive Recentering** (Recommended)
+
+    - Open **VPforce Configurator**
+    - Locate **Adaptive Recentering** feature in the Effects tab
+    - This automatically balances the stick to the current trim point, eliminating offset mismatch
+    - Prevents autopilot from detecting false pilot override
+    - Provides smoother stick behavior overall
+
+2. **Manual Stick Adjustment**
+
+    - Before activating autopilot, manually adjust stick position to match the trimmed point (use Input Overlay to verify alignment)
+    - Once synchronized, activate autopilot
+    - Less convenient but demonstrates the root cause
+
+4. **Configure Input Deadzone**
+
+    - Open **VPforce Configurator** → **Axes** tab
+    - Add a small circular deadzone (e.g., 1-3%)
+    - VPforce uses a circular deadzone that affects both axes simultaneously
+    - Creates a tolerance zone where minor stick position variations won't register as pilot input
+    - Allows autopilot to maintain control despite small trim offset differences
+    - Trade-off: Reduces precision for manual control
+
+5. **Disable DCS Input Curves**
+
+    - Open DCS axis settings for the affected aircraft
+    - Check if curves are enabled for pitch/roll axes
+    - Curves cause the physical stick position and in-game trim position to mismatch increasingly as you move away from center
+    - Disable curves by setting the curve to a straight line (linear response)
+    - Linear response ensures physical stick position always matches in-game trim position
+
+6. **TelemFFB Dynamic Deadzone** (Aircraft-Specific)
+
+    - TelemFFB supports automatic dynamic deadzone activation when autopilot is engaged for certain aircraft
+    - When AP engages, TelemFFB automatically adds deadzone to prevent false override detection
+    - Deadzone is removed when AP disengages, restoring full control precision
+    - Check TelemFFB documentation for aircraft-specific AP deadzone support
+
+!!! note "Related Issue"
+    The F-14 also exhibits the **forward stick drift at 50% position** when loading into the aircraft (same as the A-10). This is intentional module design. The forward offset is part of the FFB implementation and is why trim synchronization is important for autopilot functionality.
+
+If the issue still persists, then you either did not complete all of the steps above, or there is something unknown occurring. As you will have already determined TelemFFB not to be the issue, reach out to the **[#support](https://discord.com/channels/965234441511383080/968208779084701716)** channel on the VPforce Discord.
+
+### - HPG H145 Helicopter (FS2024)
+
+The HPG H145 helicopter in Microsoft Flight Simulator 2024 uses the AFCS (Automatic Flight Control System) which requires precise hands-on/hands-off detection for proper operation. Improper configuration can cause the AFCS to oscillate or behave erratically.
+
+**Prerequisites:**
+
+- Use **build 500 or newer** of the H145 (patch available in pinned messages in the HPG Discord)
+- Ensure TelemFFB is configured and running properly with the Rhino
+
+**Required Configuration Steps:**
+
+1. **Configure Tablet Settings for Cyclic**
+
+    - Set tablet cyclic sensitivity according to recommended configuration
+    - In FS2024, reduced cyclic sensitivity is necessary to prevent AFCS overshoot and oscillation
+
+2. **Configure Hands-On Detection**
+
+    You have two options for hands-on detection:
+
+    **Option A: Deadzone-Based Detection (Default)**
+
+    With deadzone-based hands-on detection, the joystick must center properly, regardless of where that center point is:
+
+    - Enable **"Adaptive Recentering"** in VPforce Configurator (required for reliable operation)
+    - Adaptive Recentering ensures the stick tracks the trim point, providing proper centering behavior
+    - Adjust hands-on/hands-off deadzone values in TelemFFB until you get reliable detection results
+    - Test the detection by engaging AFCS and verifying it doesn't disengage unexpectedly
+
+    **Option B: Force-Based Detection (Recommended)**
+
+    Force-based detection is more reliable than deadzone-based detection:
+
+    - Enable **"Axis Control → Force Mode"** setting in TelemFFB
+    - **Disable** Adaptive Recentering when using Force Mode
+    - Adjust the **Force Threshold** setting in TelemFFB (rather than standard deadzone settings) to configure when hands-on is detected
+    - This mode detects pilot input based on force applied to the stick rather than position offset
+
+**Troubleshooting:**
+
+- If AFCS oscillates or overshoots: Reduce cyclic sensitivity in tablet settings
+- If hands-on detection is unreliable: Adjust deadzone (Option A) or Force Threshold (Option B) values
+- If stick doesn't center properly: Verify Adaptive Recentering is enabled (only for Option A)
+
+---
+
+## How to Get Effective Support
+
+When experiencing issues with your Rhino, providing complete information up front dramatically speeds up diagnosis and resolution. This section guides you through preparing an effective support request.
+
+### What Makes a Good Support Request?
+
+#### Examples of Ineffective Requests
+
+**Bad Example #1: Too Vague**
+
+> "Sometimes my stick doesn't have spring effect. Any idea what's going on?"
+
+**Problems:**
+
+- No screenshots
+- Vague description ("sometimes", "doesn't have")
+- Missing critical details (firmware, aircraft, grip)
+- No troubleshooting steps mentioned
+- No timeline
+
+---
+
+**Bad Example #2: No Context**
+
+> "My FFB isn't working help"
+
+**Problems:**
+
+- No definition of "not working" (limp stick? wrong forces? no vibrations?)
+- No screenshots
+- No system information whatsoever
+- No description of when it occurs
+- No indication of troubleshooting attempts
+
+---
+
+**Bad Example #3: Assumes Others Know Your Setup**
+
+> "The buttons stopped responding after I updated. How do I fix this?"
+
+**Problems:**
+
+- Which buttons? (grip buttons, configurator buttons, game bindings?)
+- Updated what? (firmware, configurator, game, Windows?)
+- What grip are you using?
+- No screenshots
+- No error messages mentioned
+
+---
+
+**Bad Example #4: Missing Critical Timeline**
+
+> "I have this weird issue where the stick fights me when I trim. Is this normal?"
+
+**Problems:**
+
+- No indication if this is new or always been present
+- Missing aircraft/simulator details
+- No screenshots of Effects or Settings tabs
+- "Fights me" is vague - describe the behavior
+- Could be normal behavior depending on configuration
+
+---
+
+**Bad Example #5: Kitchen Sink Problem**
+
+> "My FFB doesn't work, my buttons don't bind, Windows doesn't recognize the device, and I can't update firmware. Also the stick makes a clicking noise. Please help urgently!"
+
+**Problems:**
+
+- Multiple unrelated issues combined (each needs separate diagnosis)
+- No screenshots for any issue
+- No systematic troubleshooting approach
+- "Urgently" doesn't make problems resolve faster
+- Should focus on one problem at a time
+
+---
+
+**Effective Request:**
+
+> "My Rhino loses spring centering force when switching DCS multiplayer servers. Here are the details:
+>
+> **Problem:** Spring effect stops working after changing servers in DCS multiplayer. Stick feels limp with no centering force.
+>
+> **When it occurs:** Only when switching between multiplayer servers mid-session. Does NOT happen on initial DCS startup.
+>
+> **What I've tried:** Restarting both DCS and VPforce Configurator fixes it temporarily.
+>
+> **Setup:**
+> - Rhino firmware: 1.0.20
+> - DCS World 2.9.8.61234
+> - Grip: Virpil MongoosT-50CM3 with 10cm extension
+> - Started happening after firmware update last week
+>
+> **Screenshots attached:**
+> - Configurator Effects tab
+> - Configurator Settings tab"
+
+**Why This Works:**
+
+- Clear, specific problem statement
+- Exact conditions when issue occurs
+- Troubleshooting steps already attempted
+- Complete hardware/software details
+- Timeline (when it started)
+- Includes screenshots
+
+### Required Information Checklist
+
+#### Required Screenshots (Mandatory)
+
+**Always provide screenshots of:**
+
+1. **VPforce Configurator - Effects Tab**
+
+    - Shows your current FFB effect settings (spring, damper, inertia, friction, etc.)
+    - Reveals if effects are disabled or misconfigured
+
+2. **VPforce Configurator - Settings Tab**
+
+    - Shows global gain multipliers and force settings
+    - Essential for diagnosing force output issues
+
+3. **VPforce Configurator - Debug Tab** (if errors visible)
+
+    - Shows device log output and error messages
+    - Critical for diagnosing hardware faults or communication errors
+
+4. **Button Mapping Tab** (if button/input related)
+
+    - Shows button assignments and configurations
+    - Required for input-related issues
+
+!!! warning "Important"
+    Without Configurator screenshots, support team cannot diagnose your issue effectively. These screenshots provide 80% of the information needed for troubleshooting.
+
+#### Problem Description
+
+Provide a clear description including:
+
+- **What exactly happens?** Be specific, not vague
+- **When does it occur?** (specific simulator, aircraft, action, or situation)
+- **What have you already tried?** (prevents suggesting steps you've completed)
+- **When did it start?** (new issue, or always been this way?)
+- **Is it consistent or intermittent?** (happens every time, or only sometimes?)
+
+#### System Information
+
+- **Rhino firmware version** (visible in Configurator)
+- **Simulator name and version** (DCS World 2.9.8, IL-2 v5.201, etc.)
+- **Grip type and extensions** (VKB, Virpil, extension length)
+- **Recent changes to your setup** (firmware updates, new hardware, configuration changes)
+
+#### Real-Time Troubleshooting
+
+**While the issue is occurring:**
+
+1. **Watch Configurator Effects Tab**
+
+    - Game-created effects appear in real-time
+    - Force values change dynamically while flying
+    - Verify effects are being sent from the simulator
+
+2. **Check Debug Tab**
+
+    - Look for error messages, connection issues, or motor faults
+    - Screenshot any warnings or errors you see
+    - Note if errors appear when issue occurs
+
+3. **TelemFFB Users (if applicable):**
+
+    - Check TelemFFB log window for connection errors or warnings
+    - Verify TelemFFB is connected to simulator
+    - Post or screenshot TelemFFB log output when reporting issues
+    - Check telemetry window to verify data reception
+
+### Common Pitfalls to Avoid
+
+1. **"It doesn't work" without details** - Define exactly what doesn't work
+2. **Missing screenshots** - Without Configurator screenshots, diagnosis is guesswork
+3. **No troubleshooting steps** - Mention what you've already tried
+4. **Incomplete system info** - Firmware version and simulator details are essential
+5. **Vague timing** - "Sometimes" isn't helpful - describe exact conditions
+6. **Assuming others know your setup** - Describe your full configuration
+
+### Where to Get Support
+
+**VPforce Discord Community:**
+
+- Most active support channel
+- Community and developers respond quickly
+- Real-time troubleshooting assistance
+- Type `!support` in Discord for quick reminder of required info
+
+**Documentation Resources:**
+
+- [VPforce Documentation](https://docs.vpforce.eu)
+- [Troubleshooting Guide](https://docs.vpforce.eu/rhino/6-troubleshooting-maintenance/)
+- [Firmware Updates](https://vpforce.eu/usb/rhino/)
+
+**Before Asking:**
+
+1. Check this troubleshooting guide for your specific issue
+2. Try factory reset and verify problem persists
+3. Gather all required screenshots and information
+4. Prepare clear problem description
+
+!!! tip "Getting Faster Help"
+    The more complete your initial support request, the faster you'll get help. Take 5 minutes to gather screenshots and details up front - it saves hours of back-and-forth questions later.
