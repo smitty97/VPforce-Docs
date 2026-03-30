@@ -3,7 +3,7 @@
 - **March 27, 2026:**
 
     - Added **[Kit Diagram](products/diy-kits.md#kit-comparison)** to DIY Motor Kits page with clickable link to the technical drawing PDF
-    - Added **Alpha Prime** to supported Virpil grips in [Grip Adapters](products/grip-adapters.md) and [Getting Started](1-rhino/2-getting-started.md)
+    - Added **Alpha Prime** to supported Virpil grips in [Grip Adapters](products/grip-adapters.md) and [Getting Started](rhino/getting-started.md)
     - Added **FC Technologies** to natively supported grip brands in [Grip Adapters](products/grip-adapters.md)
     - Added **Custom Grips (Shift-Register)** section to [Grip Adapters](products/grip-adapters.md) for community-designed grips
     - Expanded **[Rhino FFB Base](products/rhino-ffb-base.md)** specifications with weight, dimensions, PSU rating, cooling, motors, transmission ratio, and encoder resolution
@@ -15,12 +15,12 @@
 
 - **March 16, 2026:**
 
-    - Added **[Autopilot Oscillation with FFB](4-telemffb/index.md#autopilot-oscillation-with-ffb)** section documenting DCS autopilot pitch/roll oscillation caused by the simulator's autopilot-FFB feedback loop, with diagnostic steps and workarounds
+    - Added **[Autopilot Oscillation with FFB](telemffb/index.md#autopilot-oscillation-with-ffb)** section documenting DCS autopilot pitch/roll oscillation caused by the simulator's autopilot-FFB feedback loop, with diagnostic steps and workarounds
 
 - **February 27, 2026:**
 
-    - Added **Technical Specifications** section to the [Monster Rhino Kitbase](3-third-party-vendors/winger-kits/SR-F_Winger.md) page with motor torque constant (Kt), drive current limit, computed motor shaft torque, and per-gear-ratio peak torque at the stick (~15.2 N·m at 60T/15T, ~18.3 N·m at 72T/15T)
-    - Updated **[TheAmazinGreat 86 Motor FFB Base](2-community-projects/theamazingreat-rhino.md)** torque section with a full per-motor, per-gear-ratio table including 86BLF03 (Kt 0.110 N·m/A, ~13–16 N·m) and 86BLF04 (Kt 0.127 N·m/A, ~15–18 N·m) calculated from motor specs
+    - Added **Technical Specifications** section to the [Monster Rhino Kitbase](third-party-vendors/winger-kits/SR-F_Winger.md) page with motor torque constant (Kt), drive current limit, computed motor shaft torque, and per-gear-ratio peak torque at the stick (~15.2 N·m at 60T/15T, ~18.3 N·m at 72T/15T)
+    - Updated **[TheAmazinGreat 86 Motor FFB Base](community-projects/theamazingreat-rhino.md)** torque section with a full per-motor, per-gear-ratio table including 86BLF03 (Kt 0.110 N·m/A, ~13–16 N·m) and 86BLF04 (Kt 0.127 N·m/A, ~15–18 N·m) calculated from motor specs
 
 - **February 24, 2026:**
 
@@ -47,48 +47,48 @@
 
 - **November 13, 2025:**
 
-    - Updated **[Kaltokri DIY FFB Kits availability](3-third-party-vendors/kaltokri-kits/index.md)** - kits now generally in stock with 2-3 working day dispatch after payment
-    - Added **[General Troubleshooting Steps](1-rhino/6-troubleshooting-maintenance.md#general-troubleshooting-steps)** section with factory reset procedure as first troubleshooting step
+    - Updated **[Kaltokri DIY FFB Kits availability](third-party-vendors/kaltokri-kits/index.md)** - kits now generally in stock with 2-3 working day dispatch after payment
+    - Added **[General Troubleshooting Steps](rhino/troubleshooting-maintenance.md#general-troubleshooting-steps)** section with factory reset procedure as first troubleshooting step
 
 - **November 12, 2025:**
 
-    - Added **[FFB Yoke by YuchenYan](2-community-projects/ffb-yoke.md)** comprehensive project reference documentation
+    - Added **[FFB Yoke by YuchenYan](community-projects/ffb-yoke.md)** comprehensive project reference documentation
     - Added **[FFB Axes Setup][ffb-axes-setup-tab]** section documenting main axis calibration, force compensation, axis control options, and verification procedures
 
 - **November 11, 2025:**
 
-    - Added **[Kaltokri DIY FFB Kits](3-third-party-vendors/kaltokri-kits/index.md)** comprehensive documentation suite covering 8 DIY conversion kits
-        - Documented **[RhinoJoystick](3-third-party-vendors/kaltokri-kits/rhinojoystick.md)** complete DIY FFB joystick base kit with dual 57BLF03 motors
-        - Added **[RhinoMFG](3-third-party-vendors/kaltokri-kits/rhinomfg.md)** MFG Crosswind FFB conversion kit documentation (57BLF03 motor)
-        - Added **[RhinoMFG86](3-third-party-vendors/kaltokri-kits/rhinomfg86.md)** high-torque MFG Crosswind conversion with 86BLF03 motor
-        - Documented **[RhinoTPR Inside](3-third-party-vendors/kaltokri-kits/rhinotpr-inside.md)** Thrustmaster TPR conversion (motor-inside, drilled variant)
-        - Documented **[RhinoTPR Outside](3-third-party-vendors/kaltokri-kits/rhinotpr-outside.md)** Thrustmaster TPR conversion (motor-outside, non-drilled variant)
-        - Added **[RhinoACE](3-third-party-vendors/kaltokri-kits/rhinoace.md)** Virpil ACE pedals FFB conversion documentation
-        - Added **[RhinoOrion](3-third-party-vendors/kaltokri-kits/rhinoorion.md)** WinWing Orion pedals FFB conversion documentation
-        - Added **[RhinoR1](3-third-party-vendors/kaltokri-kits/rhinor1.md)** Virpil R1 pedals FFB conversion documentation
-        - Created **[General FAQ](3-third-party-vendors/kaltokri-kits/general-faq.md)** with centralized pricing, PSU requirements, shipping, payment, assembly guidance, and warranty information
+    - Added **[Kaltokri DIY FFB Kits](third-party-vendors/kaltokri-kits/index.md)** comprehensive documentation suite covering 8 DIY conversion kits
+        - Documented **[RhinoJoystick](third-party-vendors/kaltokri-kits/rhinojoystick.md)** complete DIY FFB joystick base kit with dual 57BLF03 motors
+        - Added **[RhinoMFG](third-party-vendors/kaltokri-kits/rhinomfg.md)** MFG Crosswind FFB conversion kit documentation (57BLF03 motor)
+        - Added **[RhinoMFG86](third-party-vendors/kaltokri-kits/rhinomfg86.md)** high-torque MFG Crosswind conversion with 86BLF03 motor
+        - Documented **[RhinoTPR Inside](third-party-vendors/kaltokri-kits/rhinotpr-inside.md)** Thrustmaster TPR conversion (motor-inside, drilled variant)
+        - Documented **[RhinoTPR Outside](third-party-vendors/kaltokri-kits/rhinotpr-outside.md)** Thrustmaster TPR conversion (motor-outside, non-drilled variant)
+        - Added **[RhinoACE](third-party-vendors/kaltokri-kits/rhinoace.md)** Virpil ACE pedals FFB conversion documentation
+        - Added **[RhinoOrion](third-party-vendors/kaltokri-kits/rhinoorion.md)** WinWing Orion pedals FFB conversion documentation
+        - Added **[RhinoR1](third-party-vendors/kaltokri-kits/rhinor1.md)** Virpil R1 pedals FFB conversion documentation
+        - Created **[General FAQ](third-party-vendors/kaltokri-kits/general-faq.md)** with centralized pricing, PSU requirements, shipping, payment, assembly guidance, and warranty information
 
 - **November 9, 2025:**
 
-    - Added **[DIY Tips and Tricks](2-community-projects/1-tips-and-tricks.md)** documenting multi-turn encoder ambiguity and other challenges in custom FFB configurations
-    - Expanded **[Known Issues](1-rhino/7-appendix-a-known-issues.md)** with DCS axis curve incompatibility explanation and FFB best practices
+    - Added **[DIY Tips and Tricks](community-projects/tips-and-tricks.md)** documenting multi-turn encoder ambiguity and other challenges in custom FFB configurations
+    - Expanded **[Known Issues](rhino/appendix-a-known-issues.md)** with DCS axis curve incompatibility explanation and FFB best practices
     - Documented IL-2 8-device USB limit and devreorder workaround solution
-    - Added **[Community Projects](2-community-projects/index.md)** section featuring DIY FFB builds and modifications
-    - Documented **[TheAmazinGreat 86 Motor FFB Base](2-community-projects/theamazingreat-rhino.md)** with thermal management advantages for extended high-intensity use
-    - Added **[Tiger TPR FFB Mod Guide](2-community-projects/Tiger_TPR_FFB_Mod_Guide.md)** for Thrustmaster TPR pedal FFB conversion
-    - Added **[TPR FFB Project Documentation](2-community-projects/TPR_FFB_Project_Documentation.md)** with complete assembly procedures and troubleshooting FAQ
-    - Added **[MFG Crosswind FFB Mod Guide](2-community-projects/MFG_Crosswind_FFB_Mod_Guide.md)** for MFG Crosswind pedal FFB conversion
+    - Added **[Community Projects](community-projects/index.md)** section featuring DIY FFB builds and modifications
+    - Documented **[TheAmazinGreat 86 Motor FFB Base](community-projects/theamazingreat-rhino.md)** with thermal management advantages for extended high-intensity use
+    - Added **[Tiger TPR FFB Mod Guide](community-projects/Tiger_TPR_FFB_Mod_Guide.md)** for Thrustmaster TPR pedal FFB conversion
+    - Added **[TPR FFB Project Documentation](community-projects/TPR_FFB_Project_Documentation.md)** with complete assembly procedures and troubleshooting FAQ
+    - Added **[MFG Crosswind FFB Mod Guide](community-projects/MFG_Crosswind_FFB_Mod_Guide.md)** for MFG Crosswind pedal FFB conversion
     - Documented **[Planetary Gearbox DIY][planetary-gearboxes-for-diy-projects]** options for increased torque output with reduced motor speed
-    - Added **[Community Rhino Builds](2-community-projects/community-rhino-builds.md)** overview linking protomaker, mabo, and other community base designs
-    - Created **[Third-Party Vendors](3-third-party-vendors/index.md)** section for commercial FFB kit offerings
-    - Added **[SR-F Winger Monster Rhino Kitbase](3-third-party-vendors/winger-kits/SR-F_Winger.md)** documentation for 86BLF04-based commercial kit
-    - Documented **FAULT_UNDERVOLTAGE** motor fault in **[Troubleshooting & Maintenance](1-rhino/6-troubleshooting-maintenance.md)** with voltage threshold details, under-load vs idle diagnostic guidance, and resolution procedures for power supply and connection issues
+    - Added **[Community Rhino Builds](community-projects/community-rhino-builds.md)** overview linking protomaker, mabo, and other community base designs
+    - Created **[Third-Party Vendors](third-party-vendors/index.md)** section for commercial FFB kit offerings
+    - Added **[SR-F Winger Monster Rhino Kitbase](third-party-vendors/winger-kits/SR-F_Winger.md)** documentation for 86BLF04-based commercial kit
+    - Documented **FAULT_UNDERVOLTAGE** motor fault in **[Troubleshooting & Maintenance](rhino/troubleshooting-maintenance.md)** with voltage threshold details, under-load vs idle diagnostic guidance, and resolution procedures for power supply and connection issues
 
 - **November 6, 2025:**
 
-    - Added new community project page for the [Tiger TPR FFB Mod](2-community-projects/Tiger_TPR_FFB_Mod_Guide.md)
-    - Added comprehensive documentation for the [Force-Feedback TPR Pedal Mod](2-community-projects/TPR_FFB_Project_Documentation.md) with assembly steps and FAQ
-    - Added guide for the [MFG Crosswind FFB Mod](2-community-projects/MFG_Crosswind_FFB_Mod_Guide.md)
+    - Added new community project page for the [Tiger TPR FFB Mod](community-projects/Tiger_TPR_FFB_Mod_Guide.md)
+    - Added comprehensive documentation for the [Force-Feedback TPR Pedal Mod](community-projects/TPR_FFB_Project_Documentation.md) with assembly steps and FAQ
+    - Added guide for the [MFG Crosswind FFB Mod](community-projects/MFG_Crosswind_FFB_Mod_Guide.md)
 
 - **November 5, 2025:**
 

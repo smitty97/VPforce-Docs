@@ -5,6 +5,8 @@
  * Configuration:
  * - SHOW_EMPTY_CAPTIONS: if true, shows "Fig. X" for empty captions
  *                        if false, hides empty figcaptions entirely
+ *
+ * Compatible with MkDocs Material instant loading (navigation.instant).
  */
 
 (function() {
@@ -50,11 +52,13 @@
         });
     }
     
-    // Run when DOM is fully loaded
-    if (document.readyState === 'loading') {
+    // Support MkDocs Material instant loading (navigation.instant)
+    // document$ emits on every page navigation, not just initial load
+    if (typeof document$ !== 'undefined') {
+        document$.subscribe(numberFigures);
+    } else if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', numberFigures);
     } else {
-        // DOMContentLoaded has already fired
         numberFigures();
     }
 })();

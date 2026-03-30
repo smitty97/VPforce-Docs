@@ -78,7 +78,7 @@ The Rhino supports Thrustmaster (Cougar, Warthog, F/A-18C) and Virpil grips dire
 !!! note
     Rotating Thrustmaster grips requires the use of an extension. For VKB and WinWing see below.
 
-![Rhino Grip mount head](images/getting-started/grip-compatibility.png){ width="300" }
+![Rhino Grip mount head](images/2-getting-started/grip-compatibility.png){ width="300" }
 
 ###  The VKB Adapter
 
@@ -128,7 +128,7 @@ To use the full grip functionality on the Rhino base the *"WinWing adapter"* gri
 
 The RHINO's 22-degree throw can feel excessive, especially with extensions. Physical throw limiter adapters set hard limits on stick movement. They can be ordered from VPforce or 3D printed from a [parametric CAD model](https://cad.onshape.com/documents/8addc17e2e80b65a283cbe11/w/f15586aa6951f77b58393a96/e/7795e6a8f7c49e69c519d9a7) that lets you adjust the throw angles to your preference.
 
-For detailed installation instructions, see [Installing RHINO Throw Limiter](rhino-maintenance.md#installing-rhino-throw-limiter).
+For detailed installation instructions, see [Installing RHINO Throw Limiter](../rhino/rhino-maintenance.md#installing-rhino-throw-limiter).
 
 ## Initial Connection and Updating the Firmware
 

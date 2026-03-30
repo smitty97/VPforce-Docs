@@ -296,9 +296,11 @@ With regular use, the power button (E-Stop) may gradually loosen from its mounti
 
 ##  Installing RHINO Throw Limiter
 
-The RHINO has a significant amount of throw - 22 degrees - and a long shaft compared to most comparable controllers. The long throw does help with accuracy, but especially with extensions the wide movement range can become excessive. It is possible to set limiters in software, but depending on how much force you are using in general, the software limiter may not feel strong enough. The physical throw limiter adapters offer a simple to install alternative solution that sets hard physical limits to the stick's movement.
+The RHINO has a significant amount of throw — 22 degrees — and a long shaft compared to most comparable controllers. The long throw does help with accuracy, but especially with extensions the wide movement range can become excessive. It is possible to set limiters in software, but depending on how much force you are using in general, the software limiter may not feel strong enough. The physical throw limiter adapters offer a simple to install alternative solution that sets hard physical limits to the stick's movement.
 
-The adapters come in two pieces - front and back. They can be ordered in different configurations and may have different movement ranges in different directions. To install the adapter plates,
+![Throw limiter](images/rhino-maintenance/image.png){ width="600px" }
+
+The adapters come in two pieces — front and back. They can be ordered directly from VPforce or 3D printed using the [parametric CAD model on Onshape](https://cad.onshape.com/documents/8addc17e2e80b65a283cbe11/w/f15586aa6951f77b58393a96/e/7795e6a8f7c49e69c519d9a7). The Onshape model allows you to parametrically adjust the throw angles to your preference before printing. Limiters may have different movement ranges in different directions depending on the configuration chosen. To install the adapter plates,
 
 1.  Unscrew the four Torx T5 screws that connect the dust cover at the base of the stick shaft to the RHINO base and lift the cover slightly - you don't need to remove it completely. With the cover out of the way, you should now be able to see the opening the stick shaft goes through and the top of the gimbal assembly inside the base.
 
