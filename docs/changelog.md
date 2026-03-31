@@ -1,5 +1,16 @@
 # Changelog
 
+- **March 28, 2026:**
+
+    - Strengthened **[USB Isolator Recommendation](rhino/troubleshooting-maintenance.md#usb-isolator-recommendation)** with ground-loop damage warning and ground connection best practices
+    - Added **[Powering Multiple FFB Devices from a Single PSU](community-projects/tips-and-tricks.md#powering-multiple-ffb-devices-from-a-single-psu)** section in Tips and Tricks
+    - Added **[Throw Limiters](products/throw-limiters.md)** product page with Onshape CAD model link for parametric 3D printing
+    - Updated throw limiter sections in Getting Started and Maintenance with VPforce ordering and Onshape links
+    - Added **DCS "set spring autocenter failed"** to [Known Issues](rhino/appendix-a-known-issues.md) with USB troubleshooting guidance
+    - Fixed figure numbering for instant navigation (Material `document$` subscription)
+    - Fixed ~30 broken changelog links from legacy numbered-prefix paths
+    - Added VPforce.eu link to navbar
+
 - **March 27, 2026:**
 
     - Added **[Kit Diagram](products/diy-kits.md#kit-comparison)** to DIY Motor Kits page with clickable link to the technical drawing PDF
