@@ -68,4 +68,5 @@ RewriteRule ^9\-changelog$ /changelog/ [R=301,L]
 RewriteRule ^rhino/the-vpforce-telemffb-application(/.*)?$ /telemffb$1 [R=301,L]
 
 # SR-F_Winger moved under winger-kits subdirectory
-RewriteRule ^third-party-vendors/SR-F_Winger(/.*)?$ /third-party-vendors/winger-kits/monster-rhino$1 [R=301,L]
+RewriteRule ^third-party-vendors/winger-kits/SR-F_Winger(?:/.*)?$ /third-party-vendors/winger-kits/monster-rhino? [R=301,L]
+RewriteRule ^third-party-vendors/SR-F_Winger(?:/.*)?$ /third-party-vendors/winger-kits/monster-rhino? [R=301,L]
