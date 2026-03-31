@@ -155,7 +155,7 @@ The VPforce DIY ecosystem supports an active community of builders. Third-party 
 
 - **Kaltokri DIY Kits** — pre-crimped solder-free conversion kits for MFG Crosswind, Thrustmaster TPR, and Virpil ACE pedals using 57BLF03 or 86BLF03 motors. [See Third-Party Vendors →](../third-party-vendors/kaltokri-kits/index.md)
 - **SR-F Winger Monster Rhino Kitbase** — premium pre-assembled base using the 86BLF04 kit, designed for helicopter gooseneck extensions. [See Third-Party Vendors →](../third-party-vendors/winger-kits/monster-rhino.md)
-- **FFB Yoke (YuchenYan)** — 3D-printable dual-axis yoke using 57BLF03 motors with a linear rail gantry. [See Community Projects →](../community-projects/tips-and-tricks.md)
+- **FFB Yoke (YuchenYan)** — 3D-printable dual-axis yoke using 57BLF03 motors with a linear rail gantry. [See Community Projects →](../community-projects/ffb-yoke.md)
 
 !!! warning "DIY Disclaimer"
 
