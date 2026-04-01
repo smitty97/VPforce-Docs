@@ -40,6 +40,24 @@
 }
 
 /* ── Figure captions ─────────────────────────────────────────────────────── */
+
+/* ── Collapsible h4 TOC items ────────────────────────────────────────────── */
+/* Hide h4 entries in the right-side TOC by default.                         */
+/* Expand them when the user scrolls into the parent h3 section.             */
+[data-md-component="toc"] > li > nav > ul > li > nav {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease-out;
+}
+
+[data-md-component="toc"] > li > nav > ul > li > nav > ul {
+    overflow: hidden;
+}
+
+[data-md-component="toc"] > li > nav > ul > li:has(.md-nav__link--active) > nav {
+    grid-template-rows: 1fr;
+}
+
 .md-typeset figcaption {
     text-align: center;
     font-size: 0.9em;
@@ -51,7 +69,7 @@
 /* ── External link indicator ─────────────────────────────────────────────── */
 /* Links processed by mkdocs_external_link_processor get class `external`.   */
 a.external::after {
-    content: "";
+    content: "\00a0";
     display: inline-block;
     width: 0.75em;
     height: 0.75em;

@@ -334,7 +334,7 @@ Spring Gain Mapping gives you two powerful tools to work around these limitation
 
 **1. Force vs Displacement Mapping**
 
-![Force vs Displacement Curve Editor](media/Pictures/placeholder_force_vs_displacement.png)
+![Force vs Displacement Curve Editor](images/using-the-rhino/image-3.png){ width="671px" }
 
 This controls how force increases as you move the stick away from center:
 
@@ -349,7 +349,7 @@ This controls how force increases as you move the stick away from center:
 
 **2. Game Gain Remapping**
 
-![Game Gain Remapping Curve Editor](media/Pictures/placeholder_gain_remapping.png)
+![Game Gain Remapping Curve Editor](images/using-the-rhino/image-2.png){ width="671px" }
 
 This changes how the simulator's force commands translate into actual force:
 

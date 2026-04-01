@@ -190,7 +190,7 @@ The Rhino exhibits intermittent connection problems, instability, or appears to 
 
 The Rhino FFB joystick communicates using high-frequency bidirectional data. Unlike a standard joystick that just sends "X and Y" coordinates, an FFB stick is constantly receiving "Force" instructions from the sim while sending "Position" data back. Any interruption in this communication—even brief pauses from USB throttling or power management—can cause jerky motion, lag, freezing, or complete sim lockup. This is why USB connection quality is critical for smooth FFB operation.
 
-**Common Causes & Solutions:**
+### Common Causes & Solutions
 
 Check the following items in order:
 
@@ -448,12 +448,14 @@ Each motor has an integrated driver with a status LED that provides diagnostic i
 ### FAULT_UNSTABLE
 
 **Issue:**
+
 The Rhino reports a `FAULT_UNSTABLE` error. This fault typically occurs suddenly, often preceded by an audible thump or impact sensation from the device.
 
 !!! note
     The device's fault message usually identifies which motor (or axis) triggered the fault. Check the indicated motor/axis first — it typically points straight to the side that needs inspection.
 
 **Cause:**
+
 This fault is most commonly caused by **belt slippage** on either the X-axis or Y-axis. When the belt connecting a motor to its pulley loses tension or alignment, the motor and pulley can slip relative to each other. The sudden slip causes the Rhino to detect an unexpected position change that doesn't match the expected motor command, triggering the stability check and generating the fault. The audible thump is often the moment when slippage occurs.
 
 **Resolution:**
@@ -569,56 +571,58 @@ If FFB is not working, follow the below procedure:
 
 #### Check for 3rd party app issues
 
-1. **vJoy**
+##### vJoy
 
-    1. vJoy is known to cause issues with FFB, particularly if the FFB options are enabled, which they typically are by default when vJoy is installed.
-    ![](media/Pictures/10000000000001A50000010DF11606F6D888B57D.png){ width="299px" height="191px" }
+1. vJoy is known to cause issues with FFB, particularly if the FFB options are enabled, which they typically are by default when vJoy is installed.
+![](media/Pictures/10000000000001A50000010DF11606F6D888B57D.png){ width="299px" height="191px" }
 
-    2. **SimHaptics** by rKApps
+##### SimHaptics by rKApps
 
-        - SimHaptics has an '**Auto Start**' feature that is known to break FFB for DCS. The app tries to start at the same time the aircraft in DCS is loading and this somehow interferes with DCS starting the FFB Spring effect.
+SimHaptics has an '**Auto Start**' feature that is known to break FFB for DCS. The app tries to start at the same time the aircraft in DCS is loading and this somehow interferes with DCS starting the FFB Spring effect.
 
-2. **DCS Force Feedback Fix — dinput8 wrapper**
+##### DCS Force Feedback Fix — dinput8 wrapper
 
-    A community-developed, open-source DirectInput wrapper DLL that solves two persistent DCS FFB problems:
+A community-developed, open-source DirectInput wrapper DLL that solves two persistent DCS FFB problems:
 
-    - **FFB sent to wrong devices** — DCS can route force feedback commands to unintended devices such as vJoy, pedals, a collective axis, or a steering wheel. The wrapper lets you block FFB for specific devices by name, so only your actual FFB joystick receives forces.
-    - **FFB dies after USB reconnect** — If the FFB joystick disconnects mid-mission (USB replug, firmware update, etc.), DCS re-creates the device but does not restart the force effects. Spring centering and trim forces go dead until the mission is restarted. The wrapper tracks active effects and automatically restores them after reconnect.
+- **FFB sent to wrong devices** — DCS can route force feedback commands to unintended devices such as vJoy, pedals, a collective axis, or a steering wheel. The wrapper lets you block FFB for specific devices by name, so only your actual FFB joystick receives forces.
+- **FFB dies after USB reconnect** — If the FFB joystick disconnects mid-mission (USB replug, firmware update, etc.), DCS re-creates the device but does not restart the force effects. Spring centering and trim forces go dead until the mission is restarted. The wrapper tracks active effects and automatically restores them after reconnect.
 
-    **Setup:**
+**Setup:**
 
-    1. Download `dinput8.dll` and `dinput8.ini` from the [releases page](https://github.com/walmis/dcs-force-feedback-fix/releases).
-    2. Drop both files into your DCS `bin-mt` folder (next to `DCS.exe`).
-    3. Edit `dinput8.ini` to block unwanted devices.
-    4. Launch DCS — check `dinput8_wrapper.log` for detected device names and details.
+1. Download `dinput8.dll` and `dinput8.ini` from the [releases page](https://github.com/walmis/dcs-force-feedback-fix/releases).
+2. Drop both files into your DCS `bin-mt` folder (next to `DCS.exe`).
+3. Edit `dinput8.ini` to block unwanted devices.
+4. Launch DCS — check `dinput8_wrapper.log` for detected device names and details.
 
-    **Example `dinput8.ini` configuration:**
+**Example `dinput8.ini` configuration:**
 
-    ```ini
-    [FFBDevices]
-    vJoy=block          ; Block all FFB for any device with "vJoy" in the name
-    Pedals=block        ; Block FFB for any device with "Pedals" in the name
-    Collective=block    ; Block collective FFB for helicopters
-    ```
+```ini
+[FFBDevices]
+vJoy=block          ; Block all FFB for any device with "vJoy" in the name
+Pedals=block        ; Block FFB for any device with "Pedals" in the name
+Collective=block    ; Block collective FFB for helicopters
+```
 
-    Source code and releases: [github.com/walmis/dcs-force-feedback-fix](https://github.com/walmis/dcs-force-feedback-fix)
+Source code and releases: [github.com/walmis/dcs-force-feedback-fix](https://github.com/walmis/dcs-force-feedback-fix)
 
-6.  **The Nuclear Test**
+##### The Nuclear Test
 
-    If all of the above fails to reveal the issue, try with a fresh Saved Games folder. This will remove any active mods, or any 3rd party app that makes use of the DCS export environment as a potential cause of the issue
+If all of the above fails to reveal the issue, try with a fresh `Saved Games/DCS` folder. This will remove any active mods, or any 3rd party app that makes use of the DCS export environment as a potential cause of the issue
 
-    1.  Close DCS and rename your 'DCS' (or whatever is active) saved games folder to something like 'DCS.backup'
+1.  Close DCS and rename your `Saved Games/DCS` folder to something like `Saved Games/DCS.backup`
 
-    2.  Start DCS. It will create a completely clean 'DCS' folder with no mods, export scripts or even bindings.
+2.  Start DCS. It will create a completely clean `Saved Games/DCS` folder with no mods, export scripts or even bindings.
 
-    - Here you can choose to copy your bindings from the `config/input` folder in your real DCS.backup folder over to the new test folder. Restart DCS after doing so
+Here you can choose to copy your bindings from the `config/input` folder in your real `Saved Games/DCS.backup` folder over to the new test folder. Restart DCS after doing so
 
 #### Autopilot Misbehaving or Disengaging Unexpectedly
 
-**Issue:**  
+**Issue:**
+
 Autopilot systems (altitude hold, heading hold, or other AP modes) behave erratically, continuously pitch/roll in one direction, or disengage unexpectedly shortly after engagement. This problem occurs frequently but may occasionally work correctly, making diagnosis difficult. Common in the F-14 Tomcat, but can affect any aircraft with autopilot computers.
 
-**Root Cause:**  
+**Root Cause:**
+
 Many aircraft autopilot systems interpret a mismatch between the in-game trim point and the physical stick position as a **hands-on override** — the pilot intentionally taking control. When the physical stick position doesn't match the trimmed neutral point, the autopilot computer detects this as pilot input and either fights the stick position or disengages entirely.  
 
 Aircraft with offset control mechanics (like the F-14 Tomcat, which has forward-offset by design) are particularly susceptible. When autopilot engages or commands trim adjustments, any offset between trim point and stick position causes the autopilot to treat it as active pilot input, leading to erratic behavior or immediate disengagement.
