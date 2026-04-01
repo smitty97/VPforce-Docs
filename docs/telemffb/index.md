@@ -3,7 +3,7 @@
 TelemFFB is an open source community-driven Python/Qt based application which takes telemetry from a simulator and uses that telemetry to produce various effects.
 
 The latest version can always be downloaded from the repository release page here:
-[*https://github.com/walmis/VPforce-TelemFFB/releases*](https://github.com/walmis/VPforce-TelemFFB/releases)
+[https://github.com/walmis/VPforce-TelemFFB/releases](https://github.com/walmis/VPforce-TelemFFB/releases)
 
 Supported simulators:
 
@@ -47,21 +47,21 @@ Version 2.0 of TelemFFB, released in October 2025, is a major upgrade from the p
 
 When you load TelemFFB 2.0 for the first time, your existing TelemFFB settings file (userconfig.xml) will be upgraded to the new v2 format. The following conversions will take place:
 
--   All existing user aircraft settings will be converted into user profiles. The auto-created user profiles are called "Auto User". You may rename the profiles after the conversion process via the Profiles-\>Profile Manager interface.
+-   All existing user aircraft settings will be converted into user profiles. The auto-created user profiles are called "Auto User". You may rename the profiles after the conversion process via the Profiles→Profile Manager interface.
 
 -   Any user defined aircraft that do not have a default profile will become "User Default" aircraft. While you can create further custom profiles based on these User Default entries, you can not rename User Default.
 
 -   Configurations that previously had multiple toggle flags to configure different versions of the same thing have been converted into pulldown options to enable a specific setting and show the appropriate sub settings. An example of this is the spring mode for MSFS. Previously you could enable "FBW" or "Spring Centered (non FBW)" but these were two separate toggles that needed to be manually enabled/disabled. The new pull-down options allow you to select the appropriate top level setting which will then only show the corresponding sub settings.
 
-There is no further action required to upgrade to version 2.0.
+Upgrading to version 2.0 requires no further action.
 
 ## TelemFFB and Antivirus Software
 
 ### Why Antivirus Software May Flag This Application
 
-This application is packaged using [***PyInstaller***](https://pyinstaller.org/), a tool that bundles Python applications into standalone Windows executables. Occasionally, Windows Defender or other antivirus software may flag the generated .exe file as potentially malicious. This is a common issue across many open-source and independent software projects and **does not mean the application is unsafe**.
+This application is packaged using [**PyInstaller**](https://pyinstaller.org/), a tool that bundles Python applications into standalone Windows executables. Occasionally, Windows Defender or other antivirus software may flag the generated .exe file as potentially malicious. This is a common issue across many open-source and independent software projects and **does not mean the application is unsafe**.
 
-**4.1.2 What Causes False Positives?**
+#### What Causes False Positives?
 
 There are a few key reasons why antivirus software might misidentify
 the executable:
@@ -77,14 +77,14 @@ the executable:
 **How We Ensure Safety**
 
 -   All source code is openly available and auditable.
--   Dependencies are widely used Python packages from the [*Python Package Index (PyPI)*](https://pypi.org/).
+-   Dependencies are widely used Python packages from the [Python Package Index (PyPI)](https://pypi.org/).
 -   Builds are produced in a clean environment to prevent contamination.
 
 **What You Can Do**
 
 -   **Allow the app manually** if it's flagged and you trust the source.
 -   **Submit the executable to Microsoft or your antivirus vendor** for review. This helps improve detection accuracy over time.
--   **Check with [**VirusTotal**](https://www.virustotal.com/) to independently verify whether the file is flagged across multiple engines.
+-   Check with [VirusTotal](https://www.virustotal.com/) to independently verify whether the file is flagged across multiple engines.
 
 ## The TelemFFB Configuration
 
@@ -94,19 +94,19 @@ There are two locations where user configuration settings are stored for TelemFF
 
 The system settings are stored in the registry at:
 
--    **HKEY_CURRENT_USER\\Software\\VPforce\\TelemFFB**
+-    `HKEY_CURRENT_USER\Software\VPforce\TelemFFB`
 
 **User Aircraft Settings:**
 
 The user aircraft/profile settings are stored in the user appdata folder located at:
 
--   **%LOCALAPPDATA%\\VPForce-TelemFFB**
+-   `%LOCALAPPDATA%\VPForce-TelemFFB`
 
 More detail on the system settings and user configuration are given below.
 
 **System Settings**
 
-It is not advisable to manually edit the registry, however it is useful to know where the settings are stored. All of the settings configured in the System-\>System Settings menu are stored in this location.
+Do not manually edit the registry, however it is useful to know where the settings are stored. All of the settings configured in the System→System Settings menu are stored in this location.
 
 **User Aircraft Profiles/Configurations**
 
@@ -120,7 +120,7 @@ TelemFFB started out its life as not much more than a haptic effect generator dr
 
 It has grown since then into a highly configurable, feature rich application supporting not only supplemental haptic effects but also full dynamic FFB modeling for simulators such as Microsoft Flight Simulator (20/24) and X-Plane that do not have **any **native FFB support.
 
-In general, TelemFFB leverages telemetry that is available from a given simulator and uses that telemetry to create various types of effects based on real-time analysis of said telemetry.
+TelemFFB leverages telemetry that is available from a given simulator and uses that telemetry to create various types of effects based on real-time analysis of said telemetry.
 
 In practice, it is more complicated and depends largely on the simulator. However, it can be mostly broken down into two categories: Simulators ***with ***native FFB support and those ***without***.
 
@@ -269,7 +269,7 @@ When you restart TelemFFB after completing your DCS-only testing:
 
 **New Installations:**
 
-TelemFFB does not have an installer. It is distributed as a zip file package. Simply download the latest version from the [*GitHub Releases*](https://github.com/walmis/VPforce-TelemFFB/releases) page and extract it where you want the application to reside.
+TelemFFB does not have an installer. It is distributed as a zip file package. Simply download the latest version from the [GitHub Releases](https://github.com/walmis/VPforce-TelemFFB/releases) page and extract it where you want the application to reside.
 
 The first time you install and launch TelemFFB, you will be greeted by the system settings window. Follow the guidelines in the ***systems setting section*** for setting up TelemFFB.
 
@@ -432,6 +432,7 @@ These settings are global for any instance of TelemFFB.
 #### DCS
 
 -   **Enable**
+
     -   Enable/disable support for DCS
 
 -   **Auto DCS Setup**
@@ -632,8 +633,8 @@ The Monitor tab shows received telemetry data and effects that are
 currently active:
 
 ![](../rhino/media/Pictures/10000000000003260000035963064CDF1BA08486.png){ width="516px" height="548px" }
-
->You can also detach the monitor tab from the main window and display it separately along side the main TelemFFB window. This can be useful for monitoring the active effects while you are making adjustments on the settings tab.
+!!!note 
+    You can also detach the monitor tab from the main window and display it separately along side the main TelemFFB window. This can be useful for monitoring the active effects while you are making adjustments on the settings tab.
 
 
 ### Settings Tab
@@ -788,16 +789,20 @@ After accessing the wizard via one of the two methods above, simply follow the s
 **Page 2:**
 
 1. Select the appropriate aircraft class for the aircraft you are adding.
+
     - Note that for MSFS, the aircraft type will be auto-detected based on telemetry data. However, you should validate that the selection is correct.
     - This is particularly important for aircraft types with special treatment in MSFS, such as those from **HPG**, **FlyInside**, **CowanSim**, and others. These will be auto-detected as their base aircraft type, but the TelemFFB aircraft class needs to be configured properly to achieve full functionality for these aircraft.
 
 **Page 3:**
 
 1. **If manually adding a new aircraft**, enter the full aircraft name that will be sent via telemetry from the simulator.
+
     - If auto-detected, this will already be filled out for you.
 2. Enter a regex match string for the aircraft. TelemFFB uses regex to match the aircraft string and apply the matching profile. Many aircraft, particularly in MSFS, have a base string followed by per-livery or variant text. To use the same profile for multiple variations or liveries, the match string must encompass all possible variations of the name.
+
     - You may manually enter a match string, or choose from one of the recommended pre-built match strings.
 3. Optional: Clone from existing aircraft.
+
     - You may choose to clone the new aircraft from an existing aircraft already known by TelemFFB.
     !!! note
         For some aircraft with special treatment in TelemFFB (such as HPG helicopters), it is mandatory to clone the configuration from one of the default profiles.
@@ -829,7 +834,9 @@ There is a series of radio buttons that will change the scope of the displayed p
 ![](../rhino/media/Pictures/1000000000000186000000785804F8C8EC74EA24.png){ width="390px" height="120px" }
 
 - **Active\\Inactive checkboxes**
+
     - Filter the list of profiles to show Active, Inactive or both. The active profile is the profile that will be used when the aircraft is loaded in a simulator
+
 - **Show All**
     - Displays all built-in and user default profiles
 - **Show Built-in**
@@ -842,11 +849,16 @@ There is a series of radio buttons that will change the scope of the displayed p
 The profile types are as follows:
 
 - **Built-in**
+
     - Built-in profiles are those included by default with TelemFFB. When an aircraft is loaded, the default profile will be used if there is no user defined profile
+
 - **User Aircraft**
+
     - User Aircraft are the base profile for user created aircraft entries. When you use the new aircraft wizard, either dynamically when a new aircraft is loaded or via the button on the profile manager page, a new "User Aircraft" entry will be created.
     - These behave just like profiles and can be modified, deleted, exported and cloned
+
 - **Settings Profile**
+
     - Settings Profiles are unique sets of settings for a given aircraft. You can create multiple settings profiles and easily switch between them either by setting them active from the profile manager, or by selecting them from the profile drop down on the main page in the application status area
 
 ### Managing Profiles
@@ -887,15 +899,21 @@ To export one or more profiles, first select the profiles that you would like to
 The resulting window will display the profiles to be exported along with the export options:
 
 - **Override Options**
+
     - **Include Sim Overrides**  
       Enable this option to include any sim level default overrides that would apply to the selected aircraft profiles. This will ensure that the profile, once imported, will match exactly with how the settings work in your configured setup.
+
     - **Include Class Overrides**  
       Enable this option to include any class level default overrides that would apply to the selected aircraft profiles. This will ensure that the profile, once imported, will match exactly with how the settings work in your configured setup.
+
 - **Export Mode**
+
     - **Single File**  
       All settings will be exported into a single XML file containing all of the aircraft and settings. You will be given the opportunity to name the exported file.
+
     - **Multiple Files**  
       Each aircraft will export into a single file. In this mode, you will select the export location. The files will be auto-named, including the sim and aircraft IDs for each aircraft.
+
 - **Included Devices**  
   These options will include or exclude settings for specific devices. If you have multiple devices but only want to export your Joystick settings, disable the checkboxes for the other devices.
 
@@ -1018,8 +1036,6 @@ First, it is important to understand how this works.
 
 -   When exiting, TelemFFB will re-push the gain values that were initially read on startup so as to leave the device in the same condition it was found.
 
-simplest example:
-
 ### Example Configurations
 
 Several examples follow in an attempt to describe the behavior of the Configurator Gain Overrides and its interaction with the ***Dynamic VPForce Configurator Profile*** feature. Each example walks through the behavior from startup of TelemFFB, through 2 different aircrafts loading with different settings and finally exiting TelemFFB.
@@ -1035,12 +1051,16 @@ Simplified using a single effect type in the example. Synopsis below:
 -   First example aircraft has spring gain override configured at %100
 
 -   Start TelemFFB
+
     -   Spring effect gain read at %50 and value stored for later use
 -   Load aircraft with override configured with spring at %100
+
     -   Spring gain of %100 gets set to device
 -   Load aircraft with *no* override configured
+
     -   TelemFFB pushes original %50 that was read on startup
 -   Exit TelemFFB
+
     -   TelemFFB pushes original %50 that was read on startup as final
         measure to ensure same state as startup.
 
@@ -1054,15 +1074,21 @@ Simplified using a single effect type. Synopsis below
 -   No "vpconf" specified for example loaded aircraft
 -   First example aircraft has spring gain override configured at %100
 -   Start TelemFFB
+
     -   Spring effect gain read at %50 and value stored for later use
 -   Startup VPconf Profile pushed
+
     -   Spring effect gain read at %75 and value stored for later use
 -   Load aircraft with override configured with spring at %100
+
     -   Spring gain of %100 gets set to device
 -   Load aircraft with *no* override configured
+
     -   TelemFFB pushes spring gain %75 that was read after the startup
         vpconf was pushed
+
 -   Exit TelemFFB
+
     -   TelemFFB pushes original %50 that was read on startup as final
         measure to ensure same state as startup.
 
@@ -1075,11 +1101,15 @@ Simplified using a single effect type. Synopsis below
 -   "startup vpconf" configured with spring gain at %75
 -   First example aircraft has "vpconf" configured with spring gain %80 **and** a spring gain override set at %40
 -   Start TelemFFB
+
     -   Spring effect gain read at %50 and value stored for later use
 -   Startup VPconf Profile pushed
+
     -   Spring effect gain read at %75 and value stored for later use
 -   Load aircraft with vpconf set at %80 and spring gain override configured at %40
+
     -   TelemFFB pushes new vpconf
+
         -   new gains are read and stored for later use
     -   TelemFFB pushes gains from the override config
     -   The net result is that the gains on the device will be whatever is in the override config since it happens last
@@ -1181,6 +1211,7 @@ Within each axis configuration the following controls are available:
         At least 4 points are required to enable smooth curve mode.
 
 -   **Reset**
+
     -   Resets the curve back to a simple 2 point linear curve
 
 Between the two curve configurations, use the ⬆️and ⬇️buttons to copy the X or Y axis curve up or down to the other axis.
@@ -1195,6 +1226,7 @@ Along the bottom there are several additional controls
     -   **▶️- **Increase 10 "units"
     -   **⏩- **Increase 100 "units
     -   **Import VNE (MSFS/XPlane Only)**
+
         -   Import the published (or calculated) VNE from the aircraft telemetry.
         -   The sim must be active and telemetry must be flowing to enable the button.
 
@@ -1400,7 +1432,7 @@ Adjust the trim and observe the reaction again. It will take a few iterations. T
 
 Under Autopilot Following, there are settings for deadzone and gain. You must move the controls further than the deadzone setting for the values to be sent to the sim. Gain adjusts the ratio between in-sim movement to physical stick movement.
 
-!!! note "Note" 
+!!! note 
     Some planes may require use of the axis position instead of reported trim position. You can try toggling the switch if it behaves erratically.
 
 ![](../rhino/media/Pictures/10000201000002B7000000D4CD61DC5DEF9CA39C.png){ width="629px" height="192px" }
@@ -1515,7 +1547,7 @@ Controls the maximum strength of the turbulence force.
 
 Helicopter force trim emulation is supported for both MSFS and X-Plane. To enable this feature of TelemFFB, enable the Force Trim checkbox and then in the sub-settings, configure a button on your joystick to serve as the trim release button.
 
-!!! note "Note"
+!!! note
     If you enable force trim, but do not set a button, you will see an error indication for the simulator. The Trim Release button is **mandatory**, the Trim Reset button is **optional**.
 
 ![](../rhino/media/Pictures/1000000000000299000000CDAF057E465BAE607A.png){ width="539px" height="166px" }
@@ -1581,7 +1613,7 @@ The VPforce Rhino will work with the AFCS and act as the auto trim motor does, s
 
 Both the Cyclic and Collective axes (if you have a VPforce powered collective) are integrated with the AFCS. The Tail Rotor axis is also supported.
 
-Excerpt from the [*HPG H145 user guide*](https://davux.com/docs/h145/AFCS.html#afcs-autoflight-system):
+Excerpt from the [HPG H145 user guide](https://davux.com/docs/h145/AFCS.html#afcs-autoflight-system):
 
 ![](../rhino/media/Pictures/100002010000030100000238DCC800C75B1409DA.png){ width="624px" height="461px" }
 
@@ -1594,25 +1626,32 @@ As part of this implementation, there are certain requirements and recommended s
 
 1.   You must ensure that there is enough spring force enabled in the profile to properly center the joystick
 2.   Joystick:
+
     -   If the joystick sags away from center due to grip weight or low spring force:
+
         -   use the 'balance springs' feature to counteract the grip weight
         -   use the 'adaptive centering' feature to assist bringing the stick to center position when you are not holding it.
 3.   Collective & Pedals:
+
     -   In order to properly emulate AFCS control, spring force MUST be enabled on both the collective and the pedals
 
 **TelemFFB Settings:**
 
 -   **Axis Control** must be enabled.
+
     -   This is required for both the Cyclic axes and the Collective axis (if you are using a VPforce powered Collective)
     -   You must UNBIND the axes in MSFS
 
 -   **Force Trim** must be enabled
+
     -   you must also set your force trim binding in the force trim sub-configuration in TelemFFB
 
 -   **Cyclic**
+
     -   **Hands-On Deadzone**
     -   **Hands-Off Deadzone**
 -   **Collective**
+
     -   **Collective AP Spring Gain**
     -   **Collective Dampening Gain**
 
@@ -1620,6 +1659,7 @@ As part of this implementation, there are certain requirements and recommended s
 
 -   You must **UNBIND **your Cyclic axes in MSFS to prevent conflicts with TelemFFB sending the axis position
 -   If using a VPforce powered Collective,
+
     -   You must **UNBIND **your Collective axis in MSFS to prevent conflicts with TelemFFB sending the axis position
     -   You must **BIND** a button on your collective to act as collective trim release. Pressing the trim release is required to manipulate the real helicopters collective and that is modeled in TelemFFB. The binding in MSFS is `AUTOTHROTTLE DISCONNECT`
 
@@ -1636,10 +1676,13 @@ In the tablet settings inside the aircraft, the following must be configured for
     -   Cyclic Control set to **'No Springs'**
     -   Follow-Up trim set to **'OFF' **(you may need to temporarily
         enable Centering Springs to set this)
+
     -   SAS Stability level
+
         -   For the **H160**: between -80 and -60
         -   For the **H145**: between -50 and -20
 -   Collective
+
     -   SAS Stability level -100
 
 Newer Versions:
@@ -1731,6 +1774,7 @@ The following modes are supported
     -   Same as Dynamic but with configurable speed ranges
 
 -   **Advanced Dynamic**
+
     -   See the ***Advanced Dynamic*** Spring section
 
 #### Low Hydraulic Pressure Effect
@@ -1763,6 +1807,10 @@ This behavior is a DCS-side limitation in how the simulator's autopilot interact
 
 - Ensure **DCS Axis Tune deadzone** is set to `0` — do not stack the DCS deadzone on top of a firmware deadzone, as this can make the oscillation worse
 - **Enable Adaptive Recentering** in VPforce Configurator (Effects tab) — this automatically adjusts the stick center to match the current trim point, reducing the position mismatch that drives the oscillation
+  
+!!! warning "Adaptive Recentering Exception"
+    If using **HPG Force Mode** (experimental), ensure Adaptive Recentering is **disabled** in the VPforce Configurator, as it can interfere with the force-based hands-on detection hysteresis.
+
 - For supported aircraft, TelemFFB's **Dynamic Deadzone** automatically activates a deadzone when the autopilot engages, preventing the stick from feeding small position errors back into the AP control loop. The deadzone is removed when the AP disengages, restoring full precision
 - Not all aircraft are affected equally — the behavior depends on how each module implements autopilot control surfaces
 
@@ -1780,7 +1828,7 @@ IL2 implements FFB for dynamic stick forces and some very basic shake effects. T
 !!! note
     It is recommended to set the "Shaking" intensity in the IL-2 FFB control settings to 0 if you enable these settings in TelemFFB.
 
-This can be found in Settings-\>Input Devices within the IL2 configuration
+This can be found in Settings→Input Devices within the IL2 configuration
 
 ![](../rhino/media/Pictures/10000000000002FF000000D97F38CC74B9B1537A.png){ width="445px" height="126px" }
 
@@ -1809,7 +1857,7 @@ Each setting individually controls the intensity of that effect type:
 
 ## Effects Documentation
 
-This section attempts to document and explain each of the effects and their settings. It is a work in progress. A majority of the effects will apply to all simulators. Where applicable, each effect setting has a comment in-line with the default setting to indicate which simulator(s) it applies to.
+This section explains each effect and its settings. It is a work in progress. A majority of the effects will apply to all simulators. Where applicable, each effect setting has a comment in-line with the default setting to indicate which simulator(s) it applies to.
 
 Dictionary of All Settings, in alphabetical order:
 
@@ -1875,13 +1923,14 @@ Dictionary of All Settings, in alphabetical order:
 -   Elevator AP following is reliant on the trim value, as APs use the elevator trim
 
 -   Aileron/Rudder
+
     -   Control surface deflection is read from the sim (as induced by AP control)
     -   Control surface deflection is used to calculate physical axis position
     -   Physical position is sent to joystick/rudder
 
 -   The AP induced physical control inputs are dampened to prevent out of control oscillations in turbulence or in aircraft with extra sensitive controls.
-
->**Invert Aileron Autopilot Axis**: If aircraft becomes unstable with AP Following and wants to flip inverted, try this option
+!!!note
+    **Invert Aileron Autopilot Axis**: If aircraft becomes unstable with AP Following and wants to flip inverted, try this option
 
 ### Axis Control
 
@@ -1911,6 +1960,7 @@ Helicopter:
 `ROTOR_AXIS_TAIL_ROTOR_SET`
 
 ###  Buffet Onset AoA
+
 -    DCS
 -   AoA when buffeting starts
 
@@ -1933,11 +1983,11 @@ Helicopter:
 ### Collective AP Spring Gain
 
 -   MSFS, XPLANE Heli
--   Defines the strength of the spring force to use when the collective trim release button is NOT pressed. See **Special HPG Helicopter Implementation ** section
+-   Defines the strength of the spring force to use when the collective trim release button is NOT pressed. See **Special HPG Helicopter Implementation** section
 
 ### Collective Dampening Gain
 
--   MSFS, XPLANE Heli - Defines the strength of the dampening effect to apply to the collective axis when the collective trim release is pressed See ***Special HPG Helicopter Implementation *** section
+-   MSFS, XPLANE Heli - Defines the strength of the dampening effect to apply to the collective axis when the collective trim release is pressed See ***Special HPG Helicopter Implementation*** section
 
 ### Command Runner
 
@@ -1998,6 +2048,7 @@ Helicopter:
 
 -   DCS, MSFS, XPLANE Heli
 -   Enable Effective Translational Lift Shimmy
+
     -   **ETL Start Speed** speed at which the ETL effect will start - m/s
     -   **ETL Stop Speed** speed at which the ETL effect will stop - m/s
 
@@ -2010,6 +2061,7 @@ Helicopter:
 -   MSFS, XPLANE
 
 -    Identifies aircraft as Fly-By-Wire. No airflow forces will be felt. ***Do not use together with Spring Center (not FBW)*** Gains are a percentage of the spring force value in VPforce Configurator
+
     -   **FBW Aileron Gain** Fixed spring gain for FBW aircraft.
     -   **FBW Elevator Gain** Fixed spring gain for FBW aircraft.
     -   **FBW Rudder Gain** Fixed spring gain for FBW aircraft.
@@ -2025,7 +2077,7 @@ Helicopter:
     -   **Force Trim Release Button** - Button \# to hold to release spring while moving axis. For HPG Helicopters, see section **Special HPG Helicopter Implementation**
     -   **Force Trim Reset Button** Button \# to recenter spring trims (optional)
 
-### G Force Effect *New*
+### G Force Effect (Custom Curve)
 
 -   DCS/IL2/XPLANE/MSFS Fixed Wing
 -   Unlike the ***"legacy" g-force effect***, this new version of the effect does not use an expo curve to calculate the output force. Rather, a force is calculated based on the current g loading as it exists between the min and max G settings. The physical stick deflection is then used to determine how much of this calculated force to apply at any given point in time.
@@ -2036,17 +2088,20 @@ Helicopter:
     -   Maximum Gs - The G loading where the strength will reach maximum value
     -   Y Axis Max Point - Percentage of stick deflection that will result in %100 of the calculated force to be applied to the effect.
     -   Enable Negative Gs - Enable the effect for negative G (\<1.0)
+
         -   Sub settings for this option are identical except the values will be negative
 
 
-### G Force Effect ("Legacy")
+### G Force Effect (Exponential Curve)
 
 -   The G-Force loading effect simulates the increasing force that is required to pull back on the stick as the G forces increase during a dive pull-out or hard turn. Slider value is a percentage of the constant force value in VPforce Configurator.
 
     -   **Minimum Gs -** The G loading where the effect will start
         playing
+
     -   **Maximum Gs -** G loading where the strength will reach maximum
         value
+
     -   **G Force Curvature** - affects the onset characteristics of the force effect. A value of 1.0 is a linear increase in force across the defined g range. Increasing the curvature value will result in a flatter increase at the beginning of the range followed by an ever increasing force as the effect approaches the top of the range.
 
 Example values (default is 2.2):
@@ -2109,7 +2164,7 @@ Sims Supported: **IL2**
     - **Runway Rumble**
     - **Weapon Effects**
 
-These three effects are generated by IL-2 by default. If you wish to use the effects generated by TelemFFB in lieu of those generated by IL-2, you can enable the master setting in the TelemFFB config and then disable the 'shaking' effects in the IL-2 FFB settings as follows. Navigate to Settings-\>Input Devices and move the 'Shaking' slider to 0.
+These three effects are generated by IL-2 by default. If you wish to use the effects generated by TelemFFB in lieu of those generated by IL-2, you can enable the master setting in the TelemFFB config and then disable the 'shaking' effects in the IL-2 FFB settings as follows. Navigate to Settings→Input Devices and move the 'Shaking' slider to 0.
 
 ![](../rhino/media/Pictures/1000020100000313000001A0F71232366D4546C5.png){ width="531px" height="280px" }
 
@@ -2180,9 +2235,11 @@ Sims Supported: **MSFS**, **XPLANE**
 -   Enable Propeller Rumble
 -   The two RPM and intensity settings work together to define how the effect behaves. At the **Low RPM** value, the rumble effect will be played at **Low Intensity**. As the RPM increases, the intensity will **decrease **proportionally all the way up to the **High RPM** value, where the intensity will reach **High Intensity**. Note that these are not floor values. If the RPM drops below **Low RPM**, the intensity will increase above **Low Intensity**.
 -   Generally speaking, high frequency vibrations will feel stronger at equal intensities. The "High RPM" intensity should be **lower** than the "Low RPM" intensity
+
     -   **Engine Rumble High RPM** - high RPM threshold
     -   **Engine Rumble High Intensity** peak intensity of engine rumble
         at high RPM
+
     -   **Engine Rumble Low RPM** low RPM threshold
     -   **Engine Rumble Low Intensity** peak intensity of engine rumble
         at low RPM
@@ -2256,6 +2313,7 @@ Sims Supported: **MSFS**, **XPLANE**
 -   MSFS, XPLANE
 -   Requires **Axis Control** - Enable physical stick movement with in-game trims.
 -   How it works:
+
     -   Trim position is read from the sim
     -   Physical stick center point is calculated using the 'physical' position gain
     -   Physical stick center is sent to the joystick/pedals
@@ -2328,42 +2386,52 @@ Sims Supported: **MSFS**, **XPLANE**
 If you are not receiving telemetry from DCS, please ensure the following:
 
 - Check the DCS export.lua script
+
     - Verify the TelemFFB export line exists in your DCS export.lua (the script TelemFFB installs).
     - Edit the export.lua ordering: move the TelemFFB entry up or down (sometimes a script loaded before/after can interfere). Try TelemFFB at the top, then try it at the bottom.
     - Temporarily disable or remove other custom export scripts to see if one of them conflicts.
 
 - Restart services after edits
+
     - After changing export.lua you must restart DCS (and restart TelemFFB). Try both sequences: start TelemFFB first then DCS, and vice‑versa.
 
 - Confirm TelemFFB settings and instance
+
     - In TelemFFB System → Simulator Setup, ensure DCS support is enabled.
     - If running multiple instances, confirm the master/child instance selection and that the instance handling DCS is active.
 
 - Check logs
+
     - Open TelemFFB logs (System → Open Config/Log directory) and look for export/connect errors
+
         - Check the DCS log for the exact string `telemFFB installed` — this should print when the TelemFFB export module loads.
         - Inspect the TelemFFB log for any errors or exceptions (stack traces, import errors, or repeated warnings). Include these logs when requesting support.
         - Inspect any DCS export/script logs for errors related to loading `export.lua` (syntax errors, load failures, or runtime exceptions).
 
     - Permissions / antivirus / file corruption
+
         - Ensure DCS and TelemFFB can read `export.lua` (no permission or UAC issues).
         - Temporarily disable or whitelist TelemFFB and the export script in antivirus/firewall if you suspect blocking.
         - If `export.lua` appears corrupted, restore from backup or reinstall the export script (use TelemFFB Auto DCS Setup).
 
     - Version / installation sanity checks
+
         - Confirm you have the correct TelemFFB build for your DCS version.
         - Re-run TelemFFB’s Auto DCS Setup to reinstall the export scripts and DLLs.
         - Backup your user config (`userconfig.xml`), then try reinstalling TelemFFB as a last resort.
 
     - Quick debug steps
+
         - Start DCS to the main menu, verify TelemFFB shows “Sim enabled” (or similar), then enter a mission and watch for telemetry.
         - Test in a minimal environment: temporarily remove other custom export scripts/mods, install only TelemFFB’s `export.lua`, restart DCS and TelemFFB.
         - If it still fails, capture and attach:
+
             - TelemFFB log file(s)
             - DCS log(s) showing whether `telemFFB installed` appears
             - A copy of your `export.lua` (or the snippet that references TelemFFB)
 
     - Use the built‑in support bundle
+
         - TelemFFB can create a support bundle (Help → Create Support Bundle). This produces a timestamped zip containing logs, system settings and user config.
         - Generate the bundle and attach it when requesting help — it accelerates diagnosis and usually contains the needed logs/configs.
 
