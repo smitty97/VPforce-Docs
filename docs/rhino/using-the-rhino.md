@@ -1,33 +1,29 @@
 # Using the RHINO
 
+The **VPforce RHINO** is a capable but configurable device. Different simulators handle force feedback in different ways, some need third-party tools, and advanced behavior often depends on how those layers interact. This guide explains what each part does and how to get predictable results.
 
-The **VPforce RHINO** is a powerful piece of equipment - and as with most things that pack this much punch, it brings along a certain amount of complexity. RHINO doesn't try to hide that fact. Between the many different ways simulators handle force feedback, the third-party software some of them demand, and VPforce's own *telemFFB* project, things can look a little... lively. But don't worry - it's all perfectly manageable once you know which knobs to turn and which ones to leave alone. That's exactly what this document is here for.
+Out of the box, the RHINO usually works well with sensible defaults. Before changing everything, fly a few sessions first. That gives you a baseline for how the stick feels in your preferred simulator and makes later tuning far easier.
 
+This manual covers the **VPforce FFB Configurator**, the **RhinoLoopback** application, and the basics of **TelemFFB**. It also explains key force-feedback terms, common setup tasks, and the relationship between simulator-controlled and device-controlled effects.
 
-Right out of the box, the RHINO works surprisingly well. Sure, you'll be tempted to open the configurator, slide everything to maximum, and see what happens - but take a minute to fly first. Get a feel for how force feedback behaves in your favorite sim before diving head-first into the settings. If you're new to FFB (and most pilots today are), that first flight will teach you more than a dozen sliders ever could. Plus, a little fun in the air will keep you from drowning in the ocean of options later.
-
-
-This manual walks you through the **FFB Configurator**, the **RHINO Loopback** app, and the basics of **TelemFFB**, which brings advanced FFB effects to *DCS World*. You'll also find tips on using RHINO across various simulators, explanations of what the different settings actually do, and a plain-language overview of how force feedback works behind the scenes.
-
-
-By the end, you'll not only have your RHINO dialed in - you'll also know *why* it feels the way it does. And that's when the real fun begins.
+The goal is simple: help you tune the RHINO with confidence and understand why it feels the way it does.
 
 
 ## Overview and Force Feedback Terminology
 
-###  FFB Overview
+### FFB Overview
 
-Force Feedback - also known as *control loading* - is the technology that turns an ordinary joystick into something that feels convincingly alive. It applies physical resistance and motion to your controls, simulating the forces you'd feel in a real aircraft, car, or machine.
+Force Feedback - also known as *control loading* - applies physical resistance and motion to your controls, simulating the forces you would feel in a real aircraft, car, or machine.
 
 In practice, it means your stick can "push back" when you pull too hard, your pedals can feel like they're fighting air pressure, and your yoke can suddenly go light when you stall - all thanks to small but surprisingly determined motors.
 
-Force Feedback can mimic a wide range of mechanical sensations: the stiffness of aircraft control surfaces, the suspension of a car, or even the sluggish momentum of a heavy robot arm. By linking these physical cues to what's happening in the simulation, FFB doesn't just make things more immersive - it also teaches your muscles what realism feels like.
+Force Feedback can mimic many mechanical sensations: the stiffness of control surfaces, the suspension of a car, or the sluggish momentum of a heavy mechanism. By linking these cues to simulator data, FFB improves both immersion and control feel.
 
-Combined with other technologies like motion tracking or telemetry-based effects, Force Feedback helps create training tools and games that don't just look real - they *behave* real. It's equal parts engineering and magic, with a touch of physics mischief.
+Combined with motion tracking or telemetry-driven effects, Force Feedback helps simulations feel physically convincing instead of only visually convincing.
 
-###  FFB Effect types
+### FFB Effect Types
 
-- **Periodic Effects** Generate repeating waveforms that can be sinusoidal, triangular, or square. By adjusting their amplitude (strength), frequency (speed), and phase (timing), they simulate vibrations, oscillations, or pulses - from engine rumble to weapon recoil.
+- **Periodic Effects** Generate repeating waveforms such as sine, triangle, or square waves. By adjusting amplitude, frequency, and phase, they simulate vibrations, oscillations, or pulses - from engine rumble to weapon recoil.
 
 - **Spring** Provides a centering force that increases with displacement, like stretching a spring. Used to simulate the natural pull toward neutral position - for example, the resistance you feel when deflecting aircraft controls.
 
@@ -61,7 +57,7 @@ Contains four main tabs where you can modify the Rhino's behavior:
 - **Debug** - Access diagnostic tools and advanced settings
 - **Button Mapping** - Configure button assignments and functions
 
-###  Effects Tab
+### Effects Tab
 
 ![Effects Tab View](media/Pictures/100002010000048400000459590D138A40BF582D.png){ width="671px" height="647px" }
 
@@ -99,7 +95,7 @@ If you continue to push the stick further into the resistance zone, the red dot 
 
 ![](media/Pictures/100000000000037E000003C56E2E08E715AD8A14.jpg){ width="572px" height="617px" }
 
-If the rescale axes box is checked, then the joystick will tell the computer it has reached full excursion when it reaches an endstop. Below you can see this as the red dot has moved to the limit of the little box. However, the blue dot is still centered because the motors are not doing anything.
+If the **Rescale Axes** box is checked, the joystick reports full excursion to the computer when it reaches an endstop. In the example below, the red dot has moved to the limit of the small box. The blue dot remains centered because the motors are not applying force.
 
 ![Effects Tab View](media/Pictures/100000000000036B000003AC9332F2BD783D61D6.jpg){ width="624px" height="671px" }
 
@@ -125,13 +121,13 @@ This is essential for realistic helicopter flight where force trim is a standard
 
 **Balance Spring**
 
-The Balance Spring feature compensates for grip weight and extension length to prevent the stick from sagging or drifting when trimmed at an angle. This is covered in detail in **Section 3.4 - Balancing the Grip**.
+The Balance Spring feature compensates for grip weight and extension length to prevent the stick from sagging or drifting when trimmed at an angle. This is covered in detail in **[Balancing the Grip](#balancing-the-grip)**.
 
-###  Settings Tab
+### Settings Tab
 
 ![Settings Tab View](media/Pictures/10000000000004F40000059361AF1DE1EA619835.jpg){ width="624px" height="702px" }
 
-The **Settings Tab** provides global gain multipliers (master volume controls) for each force feedback effect type. These sliders act as maximum force limiters that apply to **all** effects - whether they come from the Configurator, a game, or TelemFFB.
+The **Settings Tab** provides global gain multipliers for each force feedback effect type. These sliders act as maximum force limiters and apply to **all** effects, whether they come from the Configurator, a game, or TelemFFB.
 
 #### How Settings Work
 
@@ -142,14 +138,14 @@ Each slider controls the maximum output percentage for its corresponding effect 
 **Example:**
 - Spring effect set to 50% in Effects tab
 - Spring slider set to 50% in Settings tab
-- **Result:** You'll feel 25% of maximum spring force (0.50 × 0.50 = 0.25)
+- **Result:** You will feel 25% of maximum spring force (0.50 × 0.50 = 0.25)
 
 #### Key Differences from Effects Tab
 
 - **Effects Tab:** Configures local effects and their individual parameters
 - **Settings Tab:** Sets universal maximum limits that **always** apply, regardless of source
 
-Think of the Effects tab as setting "what effects are available and how they behave," while the Settings tab sets "how strong they're allowed to be overall."
+Think of the Effects tab as defining effect behavior, while the Settings tab defines the overall limit for each effect type.
 
 !!! tip "Quick Adjustment Strategy"
     Use the Settings tab for quick, global adjustments to overall force levels without losing your carefully tuned effect configurations in the Effects tab. This is particularly useful when switching between different aircraft or flight styles.
@@ -158,10 +154,10 @@ Think of the Effects tab as setting "what effects are available and how they beh
 
 ![Grip Calibration View](media/grip_calibration.png)
 
-Inside the Settings tab, you'll find a **Grip Type** dropdown menu. This allows you to select the type of grip connected to your Rhino (e.g., VKB, Virpil, or other supported grips). Select **Loopback** only when using the [RhinoLoopback application](#the-rhinoloopback-application) to bridge buttons from a separate USB device.
+Inside the Settings tab, you will find a **Grip Type** dropdown menu. This allows you to select the type of grip connected to your Rhino, such as VKB, Virpil, or another supported model. Select **Loopback** only when using the [RhinoLoopback application](#the-rhinoloopback-application) to bridge buttons from a separate USB device.
 
 !!! tip
-    Clicking the colored box allows yout to set the LED color for the grip if supported.
+    Clicking the colored box allows you to set the LED color for the grip if supported.
 
 **Accessing Calibration Settings:**
 
@@ -181,7 +177,8 @@ Each axis (brake, rudder, etc.) has its own calibration row with the following c
     - Move the axis through its full range of motion (from one extreme to the other)
     - The min/max values will automatically update to capture the full travel range
     - Click again to deactivate the button and exit calibration mode
-    - Click **Store Config** when finished to apply and store the new calibration
+    - Click **Apply Config** to apply the new calibration
+    - Click **Store Config** if you want to save it permanently
 
 - **Center Button (C):** Readjusts the calibration values so that the current stick position becomes the new center point. Useful for correcting center offset without recalibrating the entire range.
 
@@ -192,8 +189,9 @@ Each axis (brake, rudder, etc.) has its own calibration row with the following c
 3. **Click "Calibrate"** for the axis you want to calibrate
 4. **Move the axis** through its complete range of motion (full deflection in all directions)
 5. **Verify** that the min/max values have been captured correctly
-6. **Click "Send Config"** to save the calibration to the device
-7. **Test** the axis movement to ensure proper range and centering
+6. **Click "Apply Config"** to apply the calibration
+7. **Click "Store Config"** if you want to save it permanently
+8. **Test** the axis movement to ensure proper range and centering
 
 !!! tip "When to Calibrate"
     - After installing a new grip
@@ -206,7 +204,7 @@ Each axis (brake, rudder, etc.) has its own calibration row with the following c
 
 #### Understanding the Relationship: Effects Tab vs Settings Tab
 
-The interaction between these two tabs is crucial to understanding how your Rhino behaves:
+The interaction between these two tabs determines how the Rhino behaves:
 
 **Effects Tab - Local Effect Configuration:**
 
@@ -242,11 +240,11 @@ TelemFFB can also override individual effects in the same way a simulator does, 
     - **DCS running with native FFB:** DCS controls the spring (your 70% is ignored), but your 40% damper remains active, limited by the 80% Settings multiplier (= 32% final damper)
     - **Settings adjustment:** Lower Spring slider to 50% in Settings - now any spring force (DCS or local) is halved
 
-###  Debug Tab
+### Debug Tab
 
 ![Debug Tab View](media/Pictures/10000000000004F10000059129B47A07DBD12716.jpg){ width="514px" height="579px" }
 
-The **Debug Tab** is your window into the Rhino's internal operations, providing real-time monitoring, diagnostic tools, and troubleshooting capabilities. This tab is essential for understanding what's happening under the hood and resolving issues.
+The **Debug Tab** provides real-time monitoring, diagnostic tools, and troubleshooting information. Use it to see what the device is doing internally and to identify conflicts or faults.
 
 #### Main Features
 
@@ -268,9 +266,9 @@ The Effect Monitor provides a live view of all currently loaded FFB effects, sho
 - **Source Indicators:** Badge showing the origin of each effect:
     - **Configurator:** Effects generated by the VPforce FFB Configurator
     - **Game:** Effects sent by the simulator or game
-    - **telemFFB:** Effects generated by the TelemFFB application
+    - **TelemFFB:** Effects generated by the TelemFFB application
 
-This monitor helps you understand which effects are active at any moment and where they're coming from - crucial for troubleshooting FFB behavior and conflicts.
+This monitor shows which effects are active and where they come from. That makes it useful when force feedback feels wrong or inconsistent.
 
 **3. Diagnostic Tools**
 
@@ -286,7 +284,7 @@ The Debug tab includes several utility functions:
 - **Troubleshooting FFB Issues:** Check which effects are active and their source when behavior seems wrong
 - **Performance Monitoring:** Watch effect parameters change in real-time during gameplay
 - **Support Requests:** Capture logs and diagnostic data to help support teams identify issues
-- **Effect Conflicts:** Identify when multiple sources (game, telemFFB, Configurator) are trying to control the same effect type
+- **Effect Conflicts:** Identify when multiple sources, such as a game, TelemFFB, and the Configurator, are trying to control the same effect type
 
 !!! warning "Advanced Features"
     The Command Pane and some diagnostic functions are intended for advanced users or support-guided troubleshooting. Incorrect commands can temporarily affect device behavior until reset.
@@ -302,31 +300,29 @@ The **Button Mapping Tab** allows you to configure how buttons on your grip are 
 
 ### Spring Gain Mapping Tab
 
-![Spring Gain Mapping Tab View](media/Pictures/placeholder_spring_gain_mapping.png)
+**Spring Gain Mapping** is an advanced tuning tool for reshaping spring feel. You can make the stick lighter or heavier at different positions, or remap how simulator force commands translate into actual resistance.
 
-**Spring Gain Mapping** is an advanced tuning tool that lets you customize how your stick's spring force behaves. Think of it as creating your own "force curve" - you can make the stick lighter or heavier at different positions, or change how the simulator's force commands translate into actual resistance you feel.
+This is especially useful in simulators like DCS, where native force feedback often saturates early.
 
-This feature is particularly valuable when working with simulators like DCS that have limitations in how they handle force feedback.
+#### Understanding the Basics: What Is Dynamic Range?
 
-#### Understanding the Basics: What is Dynamic Range?
-
-Imagine your stick's motors are like a dimmer switch that goes from 0% to 100%:
+Think of the stick motors as a dimmer switch that runs from 0% to 100%:
 
 - **At 100% force setting:** The resistance gradually increases as you move the stick. The motors only hit maximum power when you've pushed the stick all the way to the edge. This gives you the full range of feeling - light forces near center, heavy forces at the edges.
 
 - **At 300% force setting:** The motors hit maximum power when you've only pushed the stick one-third of the way. After that point, you can't feel any additional increase in force because the motors are already working at full capacity. This is called "saturation."
 
-**The trade-off:** Higher force settings give you a stiffer stick, but you lose the ability to feel subtle changes in force across the full range of motion.
+**Trade-off:** Higher force settings make the stick stiffer, but reduce the amount of subtle force variation you can feel across the full range of motion.
 
 #### The Simulator Problem
 
-Here's where things get frustrating: Most DCS aircraft send a "set spring to 100%" command very early - often at relatively low airspeeds. From that point on, the stick stiffness doesn't increase anymore, even though real aircraft controls would continue getting heavier as speed increases.
+Most DCS aircraft send a "set spring to 100%" command very early, often at relatively low airspeeds. After that, stick stiffness no longer increases, even though real aircraft controls would keep getting heavier.
 
 The F-4 Phantom is a rare exception - it lets you reduce its force feedback saturation range in-game, giving you room to compensate using the Rhino's settings. But most aircraft don't offer this option.
 
-**The critical limitation:** Once DCS sends "100%", there's no way to recover the missing information. The simulator isn't sending you data about how much stiffer the controls *should* be getting - it's just telling you "maximum stiffness reached." No amount of tweaking on the Rhino side can create force-versus-airspeed realism that the simulator isn't providing.
+**Critical limitation:** Once DCS sends "100%", the missing force-versus-airspeed information is gone. The simulator is no longer telling the device how much stiffer the controls should become.
 
-**The TelemFFB Solution:** TelemFFB reads telemetry data directly from DCS and can augment or completely replace the native force curves. By monitoring airspeed, G-forces, and other flight parameters, TelemFFB can create realistic force-versus-airspeed relationships even when the simulator's native FFB has already saturated. This bypasses the "100% early" problem entirely by using actual flight data instead of relying solely on DCS's built-in force feedback commands.
+**TelemFFB solution:** TelemFFB reads telemetry data directly from DCS and can augment or replace the native force curves. By monitoring airspeed, G-forces, and other flight parameters, it can rebuild a more realistic force-versus-airspeed relationship even after native FFB has saturated.
 
 #### What Spring Gain Mapping Can Do
 
@@ -360,7 +356,7 @@ This changes how the simulator's force commands translate into actual force:
     - Compress high-force commands to prevent excessive stiffness
     - Create your own force progression even when the sim caps out early
 
-**Example:** DCS sends 100% force at 200 knots and never increases. You create a curve that remaps that "100%" command to 70% actual force, leaving room for you to manually increase stiffness as speed builds (though you'd need TelemFFB or manual adjustment for this).
+**Example:** DCS sends 100% force at 200 knots and never increases. You create a curve that remaps that "100%" command to 70% actual force, leaving room for additional stiffness later, whether through TelemFFB or manual adjustment.
 
 #### How to Use Spring Gain Mapping
 
@@ -378,7 +374,7 @@ This changes how the simulator's force commands translate into actual force:
 
 **Start Simple**
 
-Don't try to fix everything at once. Start with modest adjustments (120-150% peak force) and test. Small changes often make a big difference.
+Do not try to fix everything at once. Start with modest adjustments, such as 120-150% peak force, and test.
 
 **Understand the Trade-offs**
 
@@ -387,7 +383,7 @@ Don't try to fix everything at once. Start with modest adjustments (120-150% pea
 
 **Know the Limitations**
 
-If DCS is sending "100% force" early and staying there, Spring Gain Mapping can help you redistribute that force in more useful ways, but it can't create information the simulator isn't sending. For truly realistic force-versus-airspeed curves, you'll need TelemFFB or an aircraft (like the F-4) that gives you more control over in-game saturation.
+If DCS is sending "100% force" early and staying there, Spring Gain Mapping can redistribute that force in more useful ways, but it cannot create missing information. For more realistic force-versus-airspeed behavior, use TelemFFB or an aircraft like the F-4 that gives you more control over in-game saturation.
 
 **Monitor Heat**
 
@@ -397,15 +393,15 @@ Sustained high forces generate motor heat. If you're running high gain settings 
     If you fly the F-4 Phantom in DCS, you're in luck. You can reduce the in-game force feedback saturation range, then use Spring Gain Mapping to boost the output back up. This gives you much more control over how forces scale with airspeed.
 
 !!! warning "Information Loss"
-    Once a simulator sends "100%" and stops increasing, there's no way to recover the missing force-versus-airspeed data. Spring Gain Mapping can reshape *how* that force feels, but it can't create realism the simulator isn't providing. For advanced effects like realistic airspeed-dependent forces, consider using TelemFFB.
+    Once a simulator sends "100%" and stops increasing, there is no way to recover the missing force-versus-airspeed data. Spring Gain Mapping can reshape *how* that force feels, but it cannot create realism the simulator is not providing. For advanced effects like realistic airspeed-dependent forces, consider using TelemFFB.
 
 ### FFB Axes Setup Tab
 
 ![The FFB Axes Setup tab](images/using-the-rhino/image-1.png)
 
-The **FFB Axes Setup Tab** defines the input limits, logical center position, and behavioral characteristics of the Rhino's X and Y axes. Proper axis configuration ensures accurate positional mapping and correct centering when force feedback motors are active.
+The **FFB Axes Setup Tab** defines the input limits, logical center position, and behavior of the Rhino's X and Y axes. Proper axis configuration ensures accurate positional mapping and correct centering when the motors are active.
 
-This tab is critical during initial setup, after hardware replacement, or when troubleshooting calibration issues.
+Use this tab during initial setup, after hardware replacement, or when troubleshooting calibration issues.
 
 #### Axis Range Configuration
 
@@ -419,7 +415,7 @@ These parameters define the raw values mapping range for each axis.
 The center value should read approximately 2048 when the stick is physically at rest in the neutral position. Significant deviation from this value may indicate mechanical misalignment or the need for recalibration.
 
 !!! important "Center Value Warning"
-    If the center value is far from 2048 (e.g., below 1900 or above 2200), the `C:xxxx` indicator will turn red. This indicates misalignment between the motor encoder values and mechanical position. See section [The Muti-turn problem][the-multi-turn-problem] for more information.
+    If the center value is far from 2048 (e.g., below 1900 or above 2200), the `C:xxxx` indicator will turn red. This indicates misalignment between the motor encoder values and mechanical position. See [The Multi-Turn Problem](../community-projects/tips-and-tricks.md#the-multi-turn-problem) for more information.
 
 #### Force Compensation
 
@@ -444,13 +440,13 @@ Increasing Force Compensation adds an outward positional offset near the axis ex
 
 - Adjustable independently for each axis (X and Y)
 - Higher values apply a larger correction at the axis extremes
-- Typical starting point: values of 5–10; increase incrementally until axis extremes read correctly under load
+- Typical starting point: values of 5-10 for light setups; increase incrementally until axis extremes read correctly under load
 
 !!! note "Not a Gain Parameter"
     Force Compensation does not adjust force strength. It adjusts the reported position near axis limits to counteract the effect of mechanical flex under load.
 
 !!! warning "Excessive Flex May Indicate a Hardware Problem"
-    Some degree of mechanical flex is normal, and compensation values (100-150) are expected in a healthy system. If you need very large values to achieve correct axis range, or if the flex is visibly pronounced, this may point to an underlying hardware issue such as loose or slipping belts, worn/broken gimbal components, or a structural problem. Investigate and resolve the root cause rather than relying solely on software compensation.
+    Some degree of mechanical flex is normal. In light setups, small values may be enough. In heavier setups with strong spring forces, much larger values can still be normal. If you need unusually large compensation, or if the flex is visibly pronounced, this may point to an underlying hardware issue such as loose or slipping belts, worn or broken gimbal components, or a structural problem. Investigate the root cause rather than relying only on software compensation.
 
 **Axis Invert** - Reverses the logical direction of axis input and the corresponding force feedback polarity.
 
@@ -469,7 +465,7 @@ Increasing Force Compensation adds an outward positional offset near the axis ex
     - Testing hardware individually during troubleshooting
     - Isolating issues to determine if one axis is malfunctioning
 
-!!! tip "Tip: Troubleshooting with Disable Axis"
+!!! tip "Troubleshooting with Disable Axis"
     If experiencing calibration errors or erratic behavior, temporarily disable one axis to determine if the issue is isolated to a specific axis or affects the entire system.
 
 ---
@@ -493,7 +489,8 @@ Increasing Force Compensation adds an outward positional offset near the axis ex
 3. Ensure the stick reaches all physical stops (forward, back, left, right, and corners)
 4. The system captures minimum, maximum, and center values for both axes
 5. Click **Auto Calibrate** to deactivate the button
-6. Click **Store Config** to save the calibration
+6. Click **Apply Config** to activate the calibration
+7. Click **Store Config** if you want to save it permanently
 
 - **When to calibrate:**
 
@@ -518,7 +515,7 @@ Increasing Force Compensation adds an outward positional offset near the axis ex
 - Troubleshooting calibration issues by returning to known baseline
 - Preparing device for handoff to another user
 
-!!! warning "Warning: Configuration Loss"
+!!! warning "Configuration Loss"
     Factory Reset clears all axis calibration data. Make note of current settings before resetting if you may want to restore them later.
 
 #### Verification and Testing
@@ -543,7 +540,7 @@ After calibration or configuration changes:
 
 ### Purpose and Overview
 
-**RhinoLoopback** is a utility application that bridges button inputs from an external USB controller to the Rhino. It is designed for grips that connect via **passthrough cables** — in this setup, the Rhino does **not** read the grip's buttons directly. Instead, another USB device (such as a VKB Gunfighter base) reads the grip buttons, and RhinoLoopback forwards those button inputs to the Rhino so they can be used with Configurator features like *Hardware Force Trim*.
+**RhinoLoopback** bridges button inputs from an external USB controller to the Rhino. It is intended for grips that connect through **passthrough cables**. In that setup, the Rhino does **not** read the grip buttons directly. Another USB device, such as a VKB Gunfighter base, reads them and RhinoLoopback forwards them to the Rhino.
 
 !!! important "When You Do NOT Need Loopback"
     If your grip connects **directly** to the Rhino's grip connector (e.g., Virpil, WinWing, or other SPI grips), the Rhino already reads those buttons natively. You do **not** need RhinoLoopback — just select the correct grip type in the Configurator's **Settings** tab and the buttons will appear.
@@ -575,12 +572,12 @@ After calibration or configuration changes:
 
 **Step 4: Configure Button Mappings**
 
-Once loopback is active, the FFB Configurator will recognize and allow you to map buttons from your selected input device. You can now assign these buttons to functions like hardware force trim, mode switches, or other Configurator features.
+Once loopback is active, the FFB Configurator recognizes buttons from the selected input device. You can then assign them to hardware force trim, mode switches, or other Configurator features.
 
-!!! tip "Tip: Keep It Running"
-    RhinoLoopback must remain running in the background for button inputs to be passed through to the Configurator. You can minimize it, but don't close it.
+!!! tip "Keep It Running"
+    RhinoLoopback must remain running in the background for button inputs to be passed through to the Configurator. You can minimize it, but do not close it.
 
-!!! note "Note: Multiple Devices"
+!!! note "Multiple Devices"
     If you have multiple Rhino devices or controllers, ensure you select the correct pairing in the dropdowns to avoid confusion.
 
 ### Command Line Options
@@ -602,7 +599,7 @@ When using heavier grips or extension pieces, you may notice the joystick saggin
 - The stick "falls" slightly until spring force balances the weight
 - This drift is most noticeable with weaker spring settings
 
-###  Balance Spring Feature
+### Balance Spring Feature
 
 The **Balance Spring** feature, found in the VPforce Configurator, compensates for grip weight and orientation by applying directional bias forces. This allows you to achieve perfect trim performance regardless of grip weight or extension length.
 
@@ -611,26 +608,24 @@ The **Balance Spring** feature, found in the VPforce Configurator, compensates f
 ![After balance](media/Pictures/100002010000008A00000081D7486D8A7443891D.png){ width="138px" height="129px" }
 
 !!! note
-    Before adjusting the *"Balance Spring"* settings, it's crucial to disable Spring/Damper/Friction/Inertia effects. This ensures that adjustments made to the balance spring force settings are accurately reflected without interference from the other effects.
+    Before adjusting *"Balance Spring"*, disable Spring, Damper, Friction, and Inertia so the result is not masked by other effects.
 
-###  Adjusting Balance Spring Settings
+### Adjusting Balance Spring Settings
 
 **Preparation:**
 
-Before adjusting the Balance Spring, it's crucial to temporarily disable other force effects to get accurate results:
+Before adjusting Balance Spring, disable the following effects in the **Effects** tab:
 
 1. In the VPforce Configurator **Effects** tab, disable:
 
-   - Spring
-   - Damper
-   - Friction
-   - Inertia
-
-2. This ensures your Balance Spring adjustments aren't masked by other forces
+    - Spring
+    - Damper
+    - Friction
+    - Inertia
 
 **Configuration Steps:**
 
-Locate the "Balance Spring" section in the Effects tab. You'll see four directional strength controls:
+In the "Balance Spring" section, you will see four directional strength controls:
 
 ![Balance Spring Widget](media/Pictures/10000201000000F20000009531846FA4DDD4F42B.png){ width="242px" height="149px" }
 
@@ -657,7 +652,7 @@ Locate the "Balance Spring" section in the Effects tab. You'll see four directio
 5. **Re-enable Effects:** Once satisfied, turn your Spring/Damper/Friction/Inertia effects back on
 
 !!! tip "Finding the Sweet Spot"
-    Start with small adjustments (5-10% changes) and work your way up. It's easier to add more compensation than to undo excessive correction. The goal is for the stick to stay exactly where you leave it when released at any angle.
+    Start with small adjustments of 5-10% and work upward. It is easier to add compensation than remove too much. The goal is for the stick to stay where you leave it when released at any angle.
 
 ### Adaptive Recentering
 
@@ -696,7 +691,7 @@ Adaptive Recentering works with any **Spring-class effects** from:
 - Enable Adaptive Recentering to handle fine adjustments and dynamic corrections
 - Use moderate to high spring strengths for optimal Adaptive Recentering performance
 
-!!! note "Note: Complementary Features"
+!!! note "Complementary Features"
     Think of Balance Spring as your coarse adjustment and Adaptive Recentering as your fine tuner. Balance Spring handles the predictable weight-based forces, while Adaptive Recentering corrects for minor errors and dynamic factors.
 
 ### Static Force
@@ -727,10 +722,10 @@ Static Force can be set to positive or negative values:
 - **Negative values:** Apply force in the opposite direction
 - **Magnitude:** Determines the strength of the constant force
 
-!!! tip "Tip: Collective Builders"
+!!! tip "Collective Builders"
     When building a custom FFB collective, Static Force is invaluable for simulating the counterbalance springs found in real helicopter collectives. These springs help the collective "float" at a set position rather than falling to the bottom under its own weight.
 
-!!! warning "Warning: Use Sparingly"
+!!! warning "Use Sparingly"
     Static Force applies continuously, which means it's always consuming motor authority and generating heat. Use only as much as needed and prefer Balance Spring adjustments when possible.
 
 ## Thermal Management
@@ -739,18 +734,11 @@ The Rhino's two servo motors generate significant thermal energy during continuo
 
 ### How the Motors Heat Up
 
-The Rhino's motors operate at stall speed, holding torque against your input rather than spinning freely. 
-In this mode, nearly all the electrical power supplied to the motors is converted directly into heat through winding resistance. 
-Specifically, the heat generated by the motors follows the formula $P = I^2R$, meaning the power dissipated as heat increases with the square of the current (and therefore the torque). This squared relationship means that even small increases in force demand can lead to much higher heat buildup.
-With a typical power draw of 150W from the supply, much of this becomes thermal energy in the motor windings rather than mechanical motion.
+The Rhino's motors operate near stall speed, holding torque against your input rather than spinning freely. In that mode, most electrical power becomes heat in the windings rather than mechanical motion.
 
-Each motor in the Rhino converts electrical energy into mechanical force. 
-However, the power budget works differently than in motion-based systems - most input power becomes winding heat due to the stall-speed operating mode. 
-Under high force demands or continuous operation, this heat accumulates faster than it naturally dissipates, causing the motor temperature to rise.
+Heat generation follows $P = I^2R$. In practical terms, that means small increases in current demand can create much larger increases in heat. Under strong sustained effects or long sessions, motor temperature rises because heat builds faster than it can dissipate.
 
-When you apply strong force feedback effects - such as sustained aerodynamic pressure on the stick or prolonged dogfights - the motors draw more current and generate more heat. Similarly, extended flight sessions where the motors are constantly engaged will cause gradual thermal buildup. 
-
-As motor temperature increases, the device automatically manages thermal stress by gradually reducing available torque output to maintain a sustainable power dissipation equilibrium. This allows the system to continue operating without risk of damage, though you will notice reduced force feedback intensity as the motors approach their thermal limits. Once the motors cool sufficiently, full torque output returns.
+As temperature increases, the device gradually reduces available torque to protect itself and reach a sustainable thermal balance. You may notice weaker forces near the thermal limit, but full output returns once the motors cool.
 
 ### Built-in Cooling System
 
@@ -760,20 +748,20 @@ The Rhino includes an active cooling system with two fans that automatically eng
 
 To ensure the cooling system works at its best:
 
--   **Maintain clearance around the base:** Position the Rhino so there is adequate space around it, particularly around the sides and bottom where air enters and exits. Avoid placing it flush against walls or enclosures that restrict airflow.
--   **Keep vents clear:** Periodically check that dust and debris are not blocking the fan vents on the base. A gentle clean with compressed air or a soft brush can help maintain airflow efficiency.
--   **Ensure proper ventilation:** If you use the Rhino in an enclosed cockpit or sim rig, make sure the area has reasonable ambient air circulation. Placing it in a hot or poorly ventilated space will make thermal management more difficult.
--   **Consider ambient temperature:** On warm days or in hot rooms, the motors will reach their operating temperature more quickly. This is normal and not a cause for concern, but be aware that sustained heavy use in a warm environment may result in the fans running continuously.
+- **Maintain clearance around the base:** Leave room around the sides and bottom so air can enter and exit freely.
+- **Keep vents clear:** Remove dust and debris from the fan vents periodically.
+- **Ensure proper ventilation:** Avoid hot or enclosed spaces with poor airflow.
+- **Consider ambient temperature:** In warm rooms, the motors reach operating temperature faster and the fans may run more often.
 
 ### Managing Thermal Load During Use
 
 If you find the Rhino is throttling heavily or the fans are running constantly, consider these strategies:
 
--   **Reduce Master Gain:** Lowering the overall output gain reduces the work the motors must do and generates less heat. You can still achieve realistic force feedback at lower gain settings.
--   **Take breaks:** Extended sessions with high forces naturally accumulate heat. Short breaks allow the system to cool down and perform optimally when you resume.
--   **Balance effect strengths:** Rather than maxing out all force effects, tune them individually to realistic levels. Lighter, more refined effects often feel better than brute force and are easier on the hardware.
+- **Reduce Master Gain:** Lower overall output to reduce motor load and heat.
+- **Take breaks:** Long sessions with high forces naturally accumulate heat.
+- **Balance effect strengths:** Tune effects individually instead of maximizing everything.
 
-The fans are designed to handle normal operation, and you will rarely need to worry about thermal management during typical use. The built-in protection system ensures the device will never damage itself through overheating - but understanding how cooling works helps you get the best performance and longevity from your Rhino.
+The built-in cooling and thermal protection are designed for normal use. In most setups, you will only need basic airflow awareness and sensible gain settings.
 
 ## Leaving the RHINO Idle
 

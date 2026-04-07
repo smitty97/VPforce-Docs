@@ -3,6 +3,8 @@
 - **April 7, 2026:**
 
     - Added and refined **[Leaving the RHINO Idle](rhino/using-the-rhino.md#leaving-the-rhino-idle)** guidance covering USB power-save behavior, the **USB suspend** requirement for automatic sleep, E-stop use, full PSU power-off, and practical recommendations for how to leave the unit between sessions
+    - Refactored **[Using the RHINO](rhino/using-the-rhino.md)** to fix broken references, remove a missing image, clarify calibration save steps, and tighten several setup explanations
+    - Standardized **Apply Config** terminology across Rhino setup, usage, and maintenance pages to distinguish temporary activation from **Store Config** permanent saves
 
 - **March 31, 2026:**
 

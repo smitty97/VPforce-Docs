@@ -105,7 +105,8 @@ After belt tensioning:
 3. Click **Auto Calibrate**
 4. Move stick through full range of motion in all directions
 5. Click **Auto Calibrate** again to deactivate
-6. Click **Store Config** to save
+6. Click **Apply Config** to activate the calibration
+7. Click **Store Config** if you want to save it permanently
 
 Verify calibration values are approximately **C:~2000** for both axes.
 
@@ -135,7 +136,7 @@ If the belt has slipped off both pulleys completely, the motor position relative
 
 1. Navigate to **Effects** tab
 1. Enable **Spring** effect with moderate gain (~50%)
-1. Click **Store Config**
+1. Click **Apply Config**
 1. The motor will automatically rotate to center position (2048)
 1. Manually center the stick gimbal physically to match
 1. Reinstall the belt on both pulleys

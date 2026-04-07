@@ -165,7 +165,7 @@ Once open, you should see values like **raw_x** and **raw_y** react as you move 
     -   **This step is not required for production units, since they are calibrated before shipping**
     -   Go to the **Settings tab** and click **"Auto Calibrate"**.
     -   Move the stick to all extremes to allow the software to detect the full range of motion.
-    -   Turn off **Auto Calibrate**, then click **"Send Config"** to make the calibration active.
+    -   Turn off **Auto Calibrate**, then click **"Apply Config"** to make the calibration active.
 
 5.  **Saving the Configuration:**
 
