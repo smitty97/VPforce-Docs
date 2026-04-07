@@ -2,7 +2,7 @@
 
 - **April 7, 2026:**
 
-    - Added **[Leaving the RHINO Idle](rhino/using-the-rhino.md#leaving-the-rhino-idle)** guidance covering USB power-save behavior, E-stop use, full PSU power-off, and practical recommendations for how to leave the unit between sessions
+    - Added and refined **[Leaving the RHINO Idle](rhino/using-the-rhino.md#leaving-the-rhino-idle)** guidance covering USB power-save behavior, the **USB suspend** requirement for automatic sleep, E-stop use, full PSU power-off, and practical recommendations for how to leave the unit between sessions
 
 - **March 31, 2026:**
 

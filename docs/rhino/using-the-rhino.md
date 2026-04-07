@@ -777,15 +777,18 @@ The fans are designed to handle normal operation, and you will rarely need to wo
 
 ## Leaving the RHINO Idle
 
-There is no single required shutdown ritual for the Rhino. How you leave the unit between sessions mostly depends on convenience, how your sim rig is powered, and whether you prefer to leave the power supply energized.
+There is no single required way to leave the Rhino between sessions. The best option depends on how your rig is powered and whether you want the external PSU left energized.
 
-For most users, any of the following approaches is perfectly reasonable:
+For most users, these are the practical options:
 
-- **Leave USB connected and shut down the PC:** This is the simplest option. When the PC powers down, the Rhino enters power-save mode and de-energizes the motors, so the base does not remain actively driving force feedback.
-- **Use the E-stop button:** If you want the unit connected but want the motors disabled immediately, press the E-stop button to cut motor power.
-- **Switch off the full power strip:** Some users prefer to shut off the entire strip that powers the PC, display, and Rhino PSU. This also removes power from the Rhino's external power supply.
+- **Leave USB connected and shut down the PC:** This is the simplest approach. If **USB suspend** is enabled in the VPforce Configurator, the Rhino will go to sleep when the PC powers down and the motors will de-energize.
+- **Press the E-stop button:** If you want the Rhino to stay connected but want motor power removed immediately, press the E-stop.
+- **Switch off the full power strip:** If you prefer everything fully off, switch off the strip that powers the PC and the Rhino PSU.
 
-In practice, the best choice is simply the one that matches how you use your rig. If you want the fastest start-up for the next session, leaving USB connected is fine. If you prefer a more deliberate shutdown state, use the E-stop. If you like everything fully off between sessions, switch off the power strip.
+!!! important "USB suspend controls sleep behavior"
+    Automatic sleep only works when **USB suspend** is enabled in the VPforce Configurator. This setting is enabled by default. If you have turned it off, the Rhino may remain awake over USB after the PC shuts down until you press the E-stop or remove power.
+
+In short, leaving the Rhino plugged in is generally fine. If you want a faster start-up next time, leave it connected and let it sleep. If you want the motors positively disabled, use the E-stop. If you want the whole system unpowered, switch off the power strip.
 
 !!! tip "Simple rule of thumb"
-    If the PC is off, leaving the Rhino plugged in over USB is generally fine. If you want extra reassurance that the motors cannot energize, press the E-stop. If you want the entire setup electrically off, turn off the power strip.
+    PC off + **USB suspend enabled** = the Rhino can sleep safely over USB. For an extra layer of reassurance, press the E-stop. For a full electrical shutdown, turn off the power strip.
