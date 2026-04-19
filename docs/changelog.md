@@ -1,5 +1,14 @@
 # Changelog
 
+- **April 19, 2026:**
+
+    - Restructured **[TelemFFB Application Guide](telemffb/index.md)** into separate focused pages: [Installation](telemffb/installation.md), [UI Overview](telemffb/ui-overview.md), [Configuration](telemffb/configuration.md), [Aircraft Profiles](telemffb/aircraft-profiles.md), [Effects Reference](telemffb/effects-reference.md), [Spring Curves](telemffb/spring-curves.md), [VPconf Profiles](telemffb/vpconf-profiles.md), [Multi-Device](telemffb/multi-device.md), [What's New](telemffb/whats-new.md), and sim-specific pages for [DCS](telemffb/sim-dcs.md), [IL-2](telemffb/sim-il2.md), and [MSFS/X-Plane](telemffb/sim-msfs-xplane.md)
+    - Added **[Virpil ACE Pedal FFB Mod by Number481](community-projects/VirpilACE_FFB_Mod_Guide.md)** community project — belt-driven 6:1 ratio FFB conversion for Virpil ACE rudder pedals using the 86BLF-03 motor kit, fully reversible with no permanent modifications required
+
+- **April 17, 2026:**
+
+    - Added **[CAD Files](community-projects/index.md#cad-files)** section to the Community Projects index with downloadable STEP files for Rhino PCB, 57BLF01, 57BLF03, 86BLF04, PLG060, and PLG090 motors and gearboxes
+
 - **April 8, 2026:**
 
     - Clarified **[Monster Rhino](third-party-vendors/winger-kits/monster-rhino.md)** torque comparisons by distinguishing official Rhino published torque from theoretical calculated stick-side values
