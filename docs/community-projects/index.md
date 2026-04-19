@@ -47,6 +47,10 @@ Complete conversion guide for Thrustmaster TPR rudder pedals using the 86BLF04 m
 
 Convert MFG Crosswind rudder pedals into a force-feedback system using VPforce motor kits and 3D-printed parts. Features 74T main gear matching the original Rhino reduction ratio. Updated for MFG Crosswind V3 compatibility.
 
+#### [Virpil ACE Pedal FFB Mod by Number481](VirpilACE_FFB_Mod_Guide.md)
+
+Add force feedback to Virpil ACE rudder pedals using the VPforce 86BLF-03 motor kit. Belt-driven 6:1 gear ratio system built on an aluminum extrusion frame. Fully reversible — no drilling or permanent modifications required.
+
 ### FFB Trim Wheel
 
 #### [TPR FFB Trim Wheel by Smitty](FFB_TrimWheel.md)
