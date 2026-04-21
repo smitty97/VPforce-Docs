@@ -1,5 +1,9 @@
 # Changelog
 
+- **April 21, 2026:**
+
+    - Refined the **[Grip Adapters](products/grip-adapters.md)** page for improved clarity and consistency
+
 - **April 19, 2026:**
 
     - Restructured **[TelemFFB Application Guide](telemffb/index.md)** into separate focused pages: [Installation](telemffb/installation.md), [UI Overview](telemffb/ui-overview.md), [Configuration](telemffb/configuration.md), [Aircraft Profiles](telemffb/aircraft-profiles.md), [Effects Reference](telemffb/effects-reference.md), [Spring Curves](telemffb/spring-curves.md), [VPconf Profiles](telemffb/vpconf-profiles.md), [Multi-Device](telemffb/multi-device.md), [What's New](telemffb/whats-new.md), and sim-specific pages for [DCS](telemffb/sim-dcs.md), [IL-2](telemffb/sim-il2.md), and [MSFS/X-Plane](telemffb/sim-msfs-xplane.md)

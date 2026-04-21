@@ -16,22 +16,22 @@ The VPforce mainboard uses a Thrustmaster-compatible 5-pin grip interface. The a
 
 ![WinWing Adapter](../rhino/media/Pictures/10000000000004E200000539F6FC95994BDEBD44.png){ width="200px" }
 
-Converts WinWing's proprietary protocol to the TM 5-pin standard, both mechanically and electrically. Unlike native TM/Virpil connections, the WinWing adapter passes **analog axis data** (brake levers, thumbsticks) to the mainboard.
+The WinWing adapter converts WinWing's proprietary protocol to the Thrustmaster 5-pin standard mechanically and electrically. Unlike native Thrustmaster or Virpil connections, this adapter passes **analog axis data** (brake levers and thumbsticks) to the mainboard.
 
-**Tested and working with:** WinWing F-16EX, F-18.
+**Tested and working with:** WinWing F-16EX and F/A-18.
 
 **Setup:**
 
-1. Mount the WinWing grip onto the adapter.
-2. In the VPforce Configurator, select **"WinWing adapter"** as the grip type in the drop-down menu.
+1.  Mount the WinWing grip onto the adapter.
+2.  In the VPforce Configurator, select **"WinWing adapter"** as the grip type from the dropdown menu.
 
 !!! note "Button 32 indicator"
 
-    On newer WinWing adapter firmware revisions, button 32 will activate if the grip connection is not detected or disconnected. This is normal behavior, not an error.
+    On newer WinWing adapter firmware revisions, button 32 activates if the grip connection is not detected or is disconnected. This is normal behavior, not an error.
 
 !!! note "Analog axis calibration"
 
-    In rare cases, a WinWing grip may not report analog axis data out of the box. Perform an analog calibration using the WinWing software on a WinWing base first, then reconnect to the Rhino.
+    If a WinWing grip does not report analog axis data, calibrate it in WinWing software on a WinWing base first, then reconnect the grip to the Rhino.
 
 ---
 
@@ -39,32 +39,63 @@ Converts WinWing's proprietary protocol to the TM 5-pin standard, both mechanica
 
 ![VKB Adapter](../rhino/media/Pictures/1000020100000727000008001DBCB6BB2E3883E3.png){ width="200px" }
 
-Mounts any socket rev. B or rev. C style VKB grip to the Rhino or DIY base.
+This adapter mounts any socket rev. B or rev. C style VKB grip to the Rhino or DIY base.
 
 **Requirements:**
 
-- The VKB adapter (mechanical mount)
-- A VKB main controller ("black box") — required to operate the grip buttons
+- The VKB adapter (mechanical mount).
+- A VKB main controller ("Black Box") — required to operate the grip buttons.
 
 **How it works:**
 
-There is no electrical connection between the adapter and the VPforce mainboard. The black box connects to the grip via the external adapter cable and handles all button inputs independently. The black box will blink a red light because it does not see any axis inputs — this is normal and does not affect operation.
+There is no electrical connection between the adapter and the VPforce mainboard. The Black Box connects to the grip via the external adapter cable and handles all button inputs independently. The Black Box may blink red because it does not detect axis inputs. This is normal and does not affect operation.
 
 **Installing the adapter:**
 
-Push the connector into the grip until it makes contact, then secure with the locking collar. If the connector is tight, do not apply force to the rotating lower part only — rotate the entire lower half. Sitting on or applying force to the adapter body is not recommended as it can pinch internal wiring.
+1.  Push the connector into the grip until it makes contact.
+2.  Secure the grip with the locking collar.
+
+If the connector is tight, do not apply force to the rotating lower part only. Rotate the entire lower half instead.
 
 **Using VKB buttons in VPforce software:**
 
-To use VKB grip buttons for VPforce functions (e.g., force trim), the **RhinoLoopback** companion app is required. See the relevant section in the [Rhino manual](../rhino/using-the-rhino.md) for setup details.
+To use VKB grip buttons for VPforce functions (e.g., force trim), the **RhinoLoopback** companion app is required. See the [Configurator Settings](../rhino/using-the-rhino.md#grip-type-selection-and-calibration) section in the Rhino manual for setup details.
 
 ---
 
 ## Custom Grips (Shift-Register)
 
-The VPforce mainboard supports custom-built grips using generic shift-register button inputs via the 5-pin interface. Select **"Generic (shift-register)"** as the grip type in the VPforce Configurator.
+The VPforce mainboard supports custom-built grips using generic shift-register button inputs via the 5-pin interface. To use a custom grip, select **"Generic (shift-register)"** as the grip type in the VPforce Configurator.
 
 This allows DIY builders to wire their own button matrices using shift registers (e.g., 74HC165) connected to the mainboard's SPI interface.
+
+---
+
+## Troubleshooting
+
+### Connectivity
+
+**Symptom:** WinWing grip buttons or axes do not respond.  
+**Cause:** Incorrect grip type selected in the VPforce Configurator or loose adapter connection.  
+**Resolution:** Verify that **"WinWing adapter"** is selected in the **Settings** tab and ensure the locking collar is fully tightened.
+
+**Symptom:** VKB buttons do not respond in simulators.  
+**Cause:** RhinoLoopback application is not running or the grip type is not set to **"Loopback"**.  
+**Resolution:** Ensure the **RhinoLoopback** app is active and the Grip Type is set to **"Loopback"** in the VPforce Configurator.
+
+**Symptom:** Button 32 is permanently active on a WinWing grip.  
+**Cause:** The grip is disconnected or the adapter firmware is a newer revision.  
+**Resolution:** Check the physical connection. If the grip works otherwise, ignore the indicator as it is a normal presence detection behavior on newer firmware.
+
+### Axis Issues
+
+**Symptom:** WinWing brake lever or thumbstick reports no movement.  
+**Cause:** The grip requires periodic re-calibration or is not initialized.  
+**Resolution:** Connect the grip to an original WinWing base and perform an axis calibration using WinWing software, then return it to the Rhino.
+
+**Symptom:** VKB "Black Box" light blinks red.  
+**Cause:** The controller does not see any axis inputs (expected behavior as Rhino handles axes).  
+**Resolution:** This is normal operation. No action is required. If the cable from the Black Box to the grip is loose or disconnected, reconnect it.
 
 ---
 
